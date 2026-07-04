@@ -1,0 +1,821 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { noWidow } from '../utils/noWidow';
+import adnanImg from '../assets/brand/Team/Adnan_Web.jpg';
+import varvaraImg from '../assets/brand/Team/Varvara_Web.jpg';
+import foundersImg from '../assets/brand/Team/varvara-adnan-founders.jpg';
+
+const quoteText = "We're driven by the desire to make things that last. Not just visually, but strategically. Work that holds up over time, that grows with the client, that means something beyond the brief.";
+const quoteWords = quoteText.split(' ');
+
+const values = [
+  {
+    num: '01',
+    title: 'Quality over volume',
+    desc: `We don't take every project. We take the right ones. Every brief we accept gets our full attention. Not a template, not a junior, not a rushed deadline.`,
+  },
+  {
+    num: '02',
+    title: 'Honesty over comfort',
+    desc: `We say what we think. If something isn't working, we'll tell you. If your brief needs questioning, we'll question it. That's how good work gets made.`,
+  },
+  {
+    num: '03',
+    title: 'Systems over surfaces',
+    desc: `We don't decorate. We build. Every project is designed to work as a complete system, across formats, contexts and time.`,
+  },
+  {
+    num: '04',
+    title: 'Work that lasts',
+    desc: `Trends come and go. We're more interested in work that holds up, visually, strategically, and commercially, long after the launch.`,
+  },
+];
+
+const clients = [
+  'Stirling Education',
+  'Redshift',
+  'Long Close',
+  'Polam',
+  'Castle College',
+  'Dope Jewelry',
+  'BC Law',
+  'Advelop',
+  'Agdal Nuhanović',
+];
+
+const logoModules = import.meta.glob<string>('../assets/brand/client-logos/*.svg', { query: '?raw', import: 'default', eager: true });
+const clientLogos = Object.values(logoModules);
+---
+
+<Layout
+  title="About — Sett Agency"
+  description="A boutique creative agency built around quality, honesty and work that lasts."
+>
+  <main>
+
+    <!-- 1. Hero -->
+    <section class="ab-hero">
+      <video autoplay muted loop playsinline class="ab-hero-video">
+        <source src="/contact/media-1.mp4" type="video/mp4" />
+      </video>
+      <div class="ab-hero-overlay" aria-hidden="true"></div>
+      <div class="ab-hero-content">
+        <p class="ab-label">About</p>
+        <h1 class="ab-headline">{noWidow("Built to set brands apart.")}</h1>
+        <p class="hero-lead">{noWidow("Sett is a creative agency built on a simple belief: that the best work comes from people who refuse to settle for average. We bring together the right mix of thinking and making for every project: strategy, design, development, content. No fixed formula. Just the right people, doing the right work.")}</p>
+      </div>
+      <button class="ab-scroll-btn" aria-label="Scroll down">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </section>
+
+    <!-- 3. Quote: word-by-word scroll reveal -->
+    <section class="ab-quote">
+
+      <!-- Opening quotation mark, top-left -->
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <!-- Centred text column -->
+      <div class="quote-column">
+        <p class="quote-text">
+          {quoteWords.map((word, i) => (
+            <span class="quote-word">{word}{i < quoteWords.length - 1 ? ' ' : ''}</span>
+          ))}
+        </p>
+      </div>
+
+      <!-- Attribution: photo placeholder + name / role -->
+      <div class="quote-attribution">
+        <div class="founders-photo">
+          <Image src={foundersImg} alt="Adnan Kevrić and Varvara Šešlija, founders of Sett" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <div class="attr-text">
+          <p class="attr-name">Adnan &amp; Varvara</p>
+          <p class="attr-role">Founders, Sett</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 4. What we stand for: stacked rows -->
+    <section class="ab-values">
+      <div class="values-header">
+        <p class="values-label">{noWidow("What we stand for")}</p>
+        <h2 class="values-heading">{noWidow("What we believe in.")}</h2>
+      </div>
+      <div class="values-rows">
+        {values.map(v => (
+          <div class="value-row">
+            <h3 class="value-title">{noWidow(v.title)}</h3>
+            <p class="value-desc">{noWidow(v.desc)}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 5. Founders -->
+    <section class="ab-founders">
+      <p class="ab-label">Founders</p>
+      <div class="founders-rule" aria-hidden="true"></div>
+
+      <div class="founder-block">
+        <button class="founder-header" aria-expanded="false">
+          <div class="founder-left">
+            <h2 class="founder-name">{noWidow("Adnan Kevrić")}</h2>
+            <div class="founder-bottom">
+              <p class="founder-role">Co-Founder / Creative Direction &amp; Client Relations</p>
+            </div>
+          </div>
+          <span class="founder-toggle" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="15" y1="0" x2="15" y2="30" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="0" y1="15" x2="30" y2="15" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </span>
+          <div class="founder-portrait">
+            <Image src={adnanImg} alt="Adnan Kevrić, co-founder of Sett" class="founder-portrait-img" />
+          </div>
+        </button>
+        <div class="founder-body">
+          <div class="founder-body-inner">
+            <div class="founder-bio">
+              <p>{noWidow("Adnan leads creative direction and client relationships at Sett, guiding projects from the first brief through to launch. Before founding the studio he spent three years as a UX/UI designer in the tech sector, and worked with international clients across branding, web, and campaign work. In 2025 he presented a solo web exhibition, Retrospective, and he is currently completing a Master's in Digital Marketing and Analytics at TBS Education in Barcelona. His focus is keeping every project strategically sound and built to last.")}</p>
+            </div>
+            <div class="founder-links">
+              <a href="https://www.linkedin.com/in/adnan-kevric/" class="founder-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="mailto:adnan.kevric@settagency.com" class="founder-link">adnan.kevric@settagency.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="founder-block">
+        <button class="founder-header" aria-expanded="false">
+          <div class="founder-left">
+            <h2 class="founder-name">{noWidow("Varvara Šešlija")}</h2>
+            <div class="founder-bottom">
+              <p class="founder-role">Co-Founder / Creative Direction &amp; Project Delivery</p>
+            </div>
+          </div>
+          <span class="founder-toggle" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="15" y1="0" x2="15" y2="30" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="0" y1="15" x2="30" y2="15" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </span>
+          <div class="founder-portrait">
+            <Image src={varvaraImg} alt="Varvara Šešlija, co-founder of Sett" class="founder-portrait-img" />
+          </div>
+        </button>
+        <div class="founder-body">
+          <div class="founder-body-inner">
+            <div class="founder-bio">
+              <p>{noWidow("Varvara leads design and production at Sett, shaping how each brand looks and works across every format. She teaches Web Design and Animation at International Burch University in Sarajevo, and has delivered branding, web, advertising, photography, and 3D projects for clients across Europe. She is active in Sarajevo's design community, contributing to festivals and local creative projects. Her focus is turning strategy into identities and interfaces that hold together, from a logo to a full site.")}</p>
+            </div>
+            <div class="founder-links">
+              <a href="https://www.linkedin.com/in/varvara-%C5%A1e%C5%A1lija-26448523a/" class="founder-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="mailto:varvara.seslija@settagency.com" class="founder-link">varvara.seslija@settagency.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 6. Who we work with -->
+    <section class="ab-clients">
+      <div class="clients-copy">
+        <p class="ab-label">{noWidow("Who we work with")}</p>
+        <p class="clients-body">{noWidow("There is no typical Sett client. We have worked with organisations across Europe, different sectors, different sizes, different markets. What they share is a seriousness about how they show up and a willingness to do the work properly. If you value your business, we'll help you set it apart.")}</p>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          {clientLogos.map(svg => <span class="marquee-logo" set:html={svg} />)}
+          {clientLogos.map(svg => <span class="marquee-logo" set:html={svg} />)}
+        </div>
+      </div>
+      <ul class="sr-only">
+        {clients.map(c => <li>{c}</li>)}
+      </ul>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --px: clamp(24px, 6vw, 80px);
+    --py: clamp(60px, 8vw, 96px);
+  }
+
+  .ab-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+  }
+
+  /* ── Hero ────────────────────────────────────────────────────── */
+  .ab-hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .ab-hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .ab-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0) 100%);
+    z-index: 1;
+  }
+
+  .ab-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 var(--px) clamp(80px, 10vh, 120px);
+  }
+
+  .ab-hero .ab-label {
+    margin-bottom: 32px;
+    color: rgba(247, 246, 242, 0.65);
+  }
+
+  .ab-headline {
+    font-size: clamp(2.75rem, 7vw, 8rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #F7F6F2;
+    margin-bottom: 24px;
+  }
+
+  .hero-lead {
+    font-size: clamp(18px, 1.8vw, 22px);
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(247, 246, 242, 0.75);
+    max-width: 60ch;
+  }
+
+  .ab-scroll-btn {
+    position: absolute;
+    bottom: clamp(28px, 4vh, 44px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    background: none;
+    border: none;
+    color: #F7F6F2;
+    cursor: pointer;
+    padding: 8px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    animation: ab-bounce 2s ease-in-out infinite;
+  }
+
+  .ab-scroll-btn:hover {
+    opacity: 1;
+    animation-play-state: paused;
+  }
+
+  @keyframes ab-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ab-scroll-btn { animation: none; }
+  }
+
+  /* Header: white logo + hamburger over dark hero video */
+  :global(#siteHeader:not(.scrolled):not(.nav-open) .site-logo) {
+    color: #F7F6F2;
+  }
+  :global(#siteHeader:not(.scrolled):not(.nav-open) .ham-line) {
+    background: #F7F6F2;
+  }
+
+  /* ── Quote ───────────────────────────────────────────────────── */
+  .ab-quote {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(48px, 6vw, 80px) var(--px);
+    position: relative;
+    border-bottom: 0.5px solid #E5E4E0;
+    overflow: hidden;
+  }
+
+  /* Large opening " in top-left corner */
+  .quote-mark {
+    font-size: clamp(6rem, 12vw, 14rem);
+    font-weight: 700;
+    line-height: 0.75;
+    color: #BBBBBB;
+    align-self: flex-start;
+    user-select: none;
+  }
+
+  /* Text column, centred horizontally */
+  .quote-column {
+    width: 100%;
+    max-width: 900px;
+    align-self: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .quote-text {
+    font-size: clamp(1.8rem, 3.2vw, 4rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: #BBBBBB;
+  }
+
+  .quote-word {
+    color: #BBBBBB;
+    display: inline;
+  }
+
+  /* Attribution row: photo + name/role */
+  .quote-attribution {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    align-self: flex-start;
+  }
+
+  .founders-photo {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .attr-name {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #111111;
+  }
+
+  .attr-role {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    color: #888888;
+  }
+
+  /* reduced-motion: all words visible immediately */
+  @media (prefers-reduced-motion: reduce) {
+    .quote-word { color: #111111; }
+  }
+
+  /* ── Values: stacked rows on black ──────────────────────────── */
+  .ab-values {
+    background: #111111;
+    padding: var(--py) var(--px);
+  }
+
+  .values-header {
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+
+  .values-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 16px;
+  }
+
+  .values-heading {
+    font-size: clamp(2.8rem, 6vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #F7F6F2;
+  }
+
+  .values-rows {
+    display: flex;
+    flex-direction: column;
+    border-top: 0.5px solid #333333;
+  }
+
+  .value-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 80px);
+    align-items: start;
+    padding: clamp(32px, 4vw, 52px) 0;
+    border-bottom: 0.5px solid #333333;
+  }
+
+  .value-title {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #F7F6F2;
+  }
+
+  .value-desc {
+    font-size: clamp(15px, 1.4vw, 17px);
+    font-weight: 300;
+    line-height: 1.75;
+    color: #888888;
+    max-width: 50ch;
+  }
+
+  @media (max-width: 768px) {
+    .value-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+
+  /* ── Founders ────────────────────────────────────────────────── */
+  .ab-founders {
+    padding: var(--py) var(--px) var(--py);
+    background: #F7F6F2;
+  }
+
+  .ab-founders .ab-label {
+    margin-bottom: 20px;
+  }
+
+  .founders-rule {
+    height: 0.5px;
+    background: #E5E4E0;
+    margin-bottom: 0;
+  }
+
+  .founder-block {
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  /* Header: three-column grid — left info | toggle | portrait */
+  .founder-header {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: clamp(36px, 5vw, 64px) 0;
+    display: grid;
+    grid-template-columns: 1fr auto clamp(220px, 30%, 400px);
+    gap: 0 clamp(24px, 3vw, 48px);
+    align-items: stretch;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Manrope', sans-serif;
+    color: inherit;
+  }
+
+  .founder-header:focus-visible {
+    outline: 1.5px solid #111111;
+    outline-offset: 4px;
+  }
+
+  /* Left column: name at top, role + toggle row at bottom */
+  .founder-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .founder-name {
+    font-size: clamp(2.25rem, 5.25vw, 6.4rem);
+    font-weight: 500;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: #111111;
+  }
+
+  /* Role sits at the bottom of the left column */
+  .founder-bottom {
+    margin-top: auto;
+    padding-top: clamp(48px, 7vw, 96px);
+  }
+
+  .founder-role {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #333333;
+  }
+
+  /* Toggle column: bottom-aligned to share baseline with the role text */
+  .founder-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: end;
+    color: #111111;
+    flex-shrink: 0;
+    transition: transform 0.35s ease;
+  }
+
+  .founder-header[aria-expanded="true"] .founder-toggle {
+    transform: rotate(45deg);
+  }
+
+  /* Right column: portrait proportion, anchored to top */
+  .founder-portrait {
+    align-self: start;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+  }
+
+  .founder-portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Expandable body */
+  .founder-body {
+    overflow: hidden;
+    max-height: 0;
+    visibility: hidden;
+    transition: max-height 0.45s ease, visibility 0s linear 0.45s;
+  }
+
+  .founder-body.is-open {
+    visibility: visible;
+    transition: max-height 0.45s ease, visibility 0s linear 0s;
+  }
+
+  .founder-body-inner {
+    display: grid;
+    grid-template-columns: 1fr auto clamp(220px, 30%, 400px);
+    column-gap: clamp(24px, 3vw, 48px);
+    row-gap: clamp(24px, 4vw, 64px);
+    padding-bottom: clamp(36px, 5vw, 64px);
+    opacity: 0;
+    transition: opacity 0.3s ease 0s;
+  }
+
+  .founder-body.is-open .founder-body-inner {
+    opacity: 1;
+    transition: opacity 0.3s ease 0.2s;
+  }
+
+  .founder-bio p {
+    font-size: clamp(15px, 1.4vw, 17px);
+    font-weight: 300;
+    line-height: 1.75;
+    color: #555555;
+  }
+
+  .founder-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    grid-column: 3;
+  }
+
+  .founder-link {
+    font-size: 15px;
+    font-weight: 300;
+    color: #111111;
+    text-decoration: underline;
+    text-decoration-color: #BBBBBB;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+    width: fit-content;
+  }
+
+  .founder-link:hover {
+    text-decoration-color: #111111;
+  }
+
+@media (prefers-reduced-motion: reduce) {
+    .founder-toggle     { transition: none; }
+    .founder-body       { transition: none; }
+    .founder-body-inner { transition: none; opacity: 1; }
+  }
+
+  @media (max-width: 768px) {
+    .founder-header {
+      grid-template-columns: 1fr auto;
+    }
+    .founder-toggle {
+      align-self: start;
+    }
+    .founder-portrait {
+      grid-column: 1 / -1;
+      aspect-ratio: 3 / 4;
+      margin-top: 28px;
+    }
+    .founder-portrait-img {
+      object-position: center top;
+    }
+    .founder-body-inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  /* ── Who we work with ────────────────────────────────────────── */
+  .ab-clients {
+    padding: var(--py) 0;
+    overflow: hidden;
+  }
+
+  .clients-copy {
+    padding: 0 var(--px);
+    margin-bottom: clamp(48px, 6vw, 80px);
+  }
+
+  .clients-copy .ab-label {
+    margin-bottom: clamp(28px, 3.5vw, 44px);
+  }
+
+  .clients-body {
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 300;
+    line-height: 1.65;
+    color: #111111;
+    max-width: 76ch;
+  }
+
+  .marquee {
+    border-top: 0.5px solid #E5E4E0;
+    border-bottom: 0.5px solid #E5E4E0;
+    padding: clamp(24px, 3vw, 40px) 0;
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: clamp(56px, 7vw, 112px);
+    width: max-content;
+    animation: marquee 48s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .marquee-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .marquee-logo :global(svg) {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      animation-play-state: paused;
+      flex-wrap: wrap;
+      width: auto;
+      padding: 0 var(--px);
+      gap: 14px 40px;
+    }
+    /* hide the duplicate set so names don't repeat in static layout */
+    .marquee-track > span:nth-child(n+10) {
+      display: none;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    list-style: none;
+  }
+
+  /* ── Mobile ──────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .hero-lead    { max-width: none; }
+    .quote-column { max-width: none; }
+    .ab-clients   { padding-top: 40px; }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Header: flip to dark once hero video scrolls out of view
+  const abHeader = document.getElementById('siteHeader');
+  if (abHeader) {
+    const threshold = window.innerHeight * 0.9;
+    const updateHeader = () => abHeader.classList.toggle('scrolled', window.scrollY > threshold);
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+  }
+
+  // Scroll indicator: click scrolls to quote section
+  document.querySelector<HTMLButtonElement>('.ab-scroll-btn')?.addEventListener('click', () => {
+    document.querySelector('.ab-quote')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Connect Lenis to ScrollTrigger so pinned sections stay in sync
+  const lenis = (window as any).__lenis;
+  if (lenis) lenis.on('scroll', ScrollTrigger.update);
+
+  /* ── Quote: word-by-word reveal on scroll ─────────────────── */
+  const quoteSection = document.querySelector<HTMLElement>('.ab-quote');
+  const quoteWords   = document.querySelectorAll<HTMLElement>('.quote-word');
+
+  if (!prefersReduced && quoteSection && quoteWords.length) {
+    gsap.to(quoteWords, {
+      color: '#111111',
+      stagger: { each: 0.15 },
+      ease: 'none',
+      scrollTrigger: {
+        trigger: quoteSection,
+        start: 'top top',
+        end: `+=${quoteWords.length * 70}`,
+        pin: true,
+        scrub: 0.8,
+        anticipatePin: 1,
+      },
+    });
+  }
+
+  /* ── Founders: accordion ──────────────────────────────────── */
+  const founderHeaders = document.querySelectorAll<HTMLButtonElement>('.founder-header');
+
+  founderHeaders.forEach(btn => {
+    const body = btn.nextElementSibling as HTMLElement | null;
+    if (!body) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      if (isOpen) {
+        btn.setAttribute('aria-expanded', 'false');
+        body.style.maxHeight = '0';
+        body.classList.remove('is-open');
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        body.classList.add('is-open');
+      }
+    });
+  });
+
+  /* ── Values: fade + slide-up each row ─────────────────────── */
+  const valueRows = document.querySelectorAll<HTMLElement>('.value-row');
+
+  if (!prefersReduced && valueRows.length) {
+    gsap.set(valueRows, { opacity: 0, y: 28 });
+    valueRows.forEach(row => {
+      gsap.to(row, {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 88%',
+          toggleActions: 'play none none none',
+        },
+      });
+    });
+  }
+</script>

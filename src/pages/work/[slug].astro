@@ -1,0 +1,641 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { noWidow } from '../../utils/noWidow';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('work');
+  return entries.map(entry => ({
+    params: { slug: entry.id.replace(/\.md$/, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const slug = entry.id.replace(/\.md$/, '');
+
+const allEntries = await getCollection('work');
+const sorted = allEntries.sort((a, b) => a.data.order - b.data.order);
+const currentIndex = sorted.findIndex(e => e.id === entry.id);
+const nextEntry = sorted[(currentIndex + 1) % sorted.length];
+
+const testimonials = (data.testimonials && data.testimonials.length > 0)
+  ? data.testimonials
+  : [{ quote: 'Testimonial to be added.', name: 'Client Name', role: 'Role, Company' }];
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>('../../assets/work/**/*.png');
+
+const loadImg = async (name: string): Promise<ImageMetadata | undefined> => {
+  const mod = await allImages[`../../assets/work/${slug}/${name}`]?.();
+  return mod?.default;
+};
+
+type GridItem =
+  | { type: 'full'; img: ImageMetadata }
+  | { type: 'pair'; imgA: ImageMetadata; imgB: ImageMetadata }
+  | { type: 'trio'; imgA: ImageMetadata; imgB: ImageMetadata; imgC: ImageMetadata }
+  | { type: 'quad'; imgA: ImageMetadata; imgB: ImageMetadata; imgC: ImageMetadata; imgD: ImageMetadata }
+  | { type: 'split'; imgA: ImageMetadata; imgB: ImageMetadata; imgC: ImageMetadata }
+  | { type: 'videopair'; fileA: string; fileB: string }
+  | { type: 'fullvideo'; file: string }
+  | { type: 'reel'; file: string }
+  | { type: 'video' };
+
+const gridItems: GridItem[] = (await Promise.all(
+  (data.gallery ?? []).map(async (item: string) => {
+    if (item === 'video') return { type: 'video' } as const;
+    if (item.startsWith('pair:')) {
+      const [fileA, fileB] = item.replace('pair:', '').split(':');
+      const [imgA, imgB] = await Promise.all([loadImg(fileA), loadImg(fileB)]);
+      if (!imgA || !imgB) return null;
+      return { type: 'pair', imgA, imgB } as const;
+    }
+    if (item.startsWith('trio:')) {
+      const [fileA, fileB, fileC] = item.replace('trio:', '').split(':');
+      const [imgA, imgB, imgC] = await Promise.all([loadImg(fileA), loadImg(fileB), loadImg(fileC)]);
+      if (!imgA || !imgB || !imgC) return null;
+      return { type: 'trio', imgA, imgB, imgC } as const;
+    }
+    if (item.startsWith('quad:')) {
+      const [fileA, fileB, fileC, fileD] = item.replace('quad:', '').split(':');
+      const [imgA, imgB, imgC, imgD] = await Promise.all([loadImg(fileA), loadImg(fileB), loadImg(fileC), loadImg(fileD)]);
+      if (!imgA || !imgB || !imgC || !imgD) return null;
+      return { type: 'quad', imgA, imgB, imgC, imgD } as const;
+    }
+    if (item.startsWith('split:')) {
+      const [fileA, fileB, fileC] = item.replace('split:', '').split(':');
+      const [imgA, imgB, imgC] = await Promise.all([loadImg(fileA), loadImg(fileB), loadImg(fileC)]);
+      if (!imgA || !imgB || !imgC) return null;
+      return { type: 'split', imgA, imgB, imgC } as const;
+    }
+    if (item.startsWith('videopair:')) {
+      const [fileA, fileB] = item.replace('videopair:', '').split(':');
+      return { type: 'videopair', fileA, fileB } as const;
+    }
+    if (item.startsWith('fullvideo:')) {
+      const file = item.replace('fullvideo:', '');
+      return { type: 'fullvideo', file } as const;
+    }
+    if (item.startsWith('reel:')) {
+      const file = item.replace('reel:', '');
+      return { type: 'reel', file } as const;
+    }
+    const img = await loadImg(item);
+    if (!img) return null;
+    return { type: 'full', img } as const;
+  })
+)).filter(Boolean) as GridItem[];
+
+const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
+---
+
+<Layout title={`${data.title} — Sett Agency`} description={data.summary}>
+
+  <!-- Hero block -->
+  <section class="cs-hero">
+    <p class="cs-services">{data.services.join(' · ')}</p>
+    <h1 class="cs-title">{noWidow(data.title)}</h1>
+  </section>
+
+  <!-- 3. Summary + meta -->
+  <section class="cs-intro">
+    <div class="cs-summary">
+      <p>{noWidow(data.summary)}</p>
+    </div>
+    <div class="cs-meta">
+      <div class="meta-row">
+        <span class="meta-label">Industry</span>
+        <span class="meta-value">{data.industry}</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Location</span>
+        <span class="meta-value">{data.location}</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Year</span>
+        <span class="meta-value">{data.year}</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Website</span>
+        <span class="meta-value">
+          <a href={`https://${data.website}`} target="_blank" rel="noopener noreferrer">{data.website}</a>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Accordion -->
+  <section class="cs-accordion">
+    <h2 class="accordion-heading">The work</h2>
+
+    <details class="accordion-item" open>
+      <summary>
+        <span class="accordion-title">Challenge</span>
+        <span class="accordion-icon">−</span>
+      </summary>
+      <div class="accordion-body">
+        <div class="accordion-inner">
+          <p>{noWidow(data.challenge)}</p>
+          <!-- TODO: image slot -->
+        </div>
+      </div>
+    </details>
+
+    <details class="accordion-item">
+      <summary>
+        <span class="accordion-title">Process</span>
+        <span class="accordion-icon">+</span>
+      </summary>
+      <div class="accordion-body">
+        <div class="accordion-inner">
+          <p>{noWidow(data.process)}</p>
+          <!-- TODO: image slot -->
+        </div>
+      </div>
+    </details>
+
+    <details class="accordion-item">
+      <summary>
+        <span class="accordion-title">Solution</span>
+        <span class="accordion-icon">+</span>
+      </summary>
+      <div class="accordion-body">
+        <div class="accordion-inner">
+          <p>{noWidow(data.solution)}</p>
+          <!-- TODO: image slot -->
+        </div>
+      </div>
+    </details>
+
+    <details class="accordion-item">
+      <summary>
+        <span class="accordion-title">Results</span>
+        <span class="accordion-icon">+</span>
+      </summary>
+      <div class="accordion-body">
+        <div class="accordion-inner">
+          <p>{noWidow(data.results)}</p>
+          <!-- TODO: image slot -->
+        </div>
+      </div>
+    </details>
+
+  </section>
+
+  <!-- 6. Photo grid -->
+  {gridItems.length > 0 && (
+    <div class="case-grid">
+      {gridItems.map((item) => {
+        if (item.type === 'video') return (
+          <div class="case-grid__full">
+            <div class="video-wrap">
+              <video autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+                <source src={`/work/${slug}/${data.videoSlug}`} type="video/mp4" />
+              </video>
+              <button class="sound-btn" aria-label="Toggle sound">SOUND OFF</button>
+            </div>
+          </div>
+        );
+        if (item.type === 'pair') return (
+          <div class="case-grid__pair">
+            <Image src={item.imgA} alt="" style="width:100%;height:auto;display:block;" />
+            <Image src={item.imgB} alt="" style="width:100%;height:auto;display:block;" />
+          </div>
+        );
+        if (item.type === 'trio') return (
+          <div class="case-grid__trio">
+            <Image src={item.imgA} alt="" style="width:100%;height:auto;display:block;" />
+            <Image src={item.imgB} alt="" style="width:100%;height:auto;display:block;" />
+            <Image src={item.imgC} alt="" style="width:100%;height:auto;display:block;" />
+          </div>
+        );
+        if (item.type === 'quad') return (
+          <div class="case-grid__quad">
+            <Image src={item.imgA} alt="" style="width:100%;height:auto;display:block;" />
+            <Image src={item.imgB} alt="" style="width:100%;height:auto;display:block;" />
+            <Image src={item.imgC} alt="" style="width:100%;height:auto;display:block;" />
+            <Image src={item.imgD} alt="" style="width:100%;height:auto;display:block;" />
+          </div>
+        );
+        if (item.type === 'split') return (
+          <div class="case-grid__split">
+            <div class="split-left">
+              <Image src={item.imgA} alt="" style="width:100%;height:auto;display:block;" />
+              <Image src={item.imgB} alt="" style="width:100%;height:auto;display:block;" />
+            </div>
+            <div class="split-right">
+              <Image src={item.imgC} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+            </div>
+          </div>
+        );
+        if (item.type === 'videopair') return (
+          <div class="case-grid__pair">
+            <div class="video-wrap">
+              <video autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+                <source src={`/work/${slug}/${item.fileA}`} type="video/mp4" />
+              </video>
+              <button class="sound-btn" aria-label="Toggle sound">SOUND OFF</button>
+            </div>
+            <div class="video-wrap">
+              <video autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+                <source src={`/work/${slug}/${item.fileB}`} type="video/mp4" />
+              </video>
+              <button class="sound-btn" aria-label="Toggle sound">SOUND OFF</button>
+            </div>
+          </div>
+        );
+        if (item.type === 'fullvideo') return (
+          <div class="case-grid__full">
+            <div class="video-wrap">
+              <video autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+                <source src={`/work/${slug}/${item.file}`} type="video/mp4" />
+              </video>
+              <button class="sound-btn" aria-label="Toggle sound">SOUND OFF</button>
+            </div>
+          </div>
+        );
+        if (item.type === 'reel') return (
+          <div class="case-grid__reel">
+            <video autoplay muted loop playsinline>
+              <source src={`/work/${slug}/${item.file}`} type="video/mp4" />
+            </video>
+          </div>
+        );
+        return (
+          <div class="case-grid__full">
+            <Image src={item.img} alt="" style="width:100%;height:auto;display:block;" />
+          </div>
+        );
+      })}
+    </div>
+  )}
+
+  <!-- 7. Testimonial -->
+  <section class="cs-testimonial">
+    <div class="testimonial-grid">
+
+      <div class="testimonial-left">
+        <p class="testimonial-label">{noWidow("What clients say")}</p>
+        <h2 class="testimonial-heading">{noWidow("The work,")}<br />{noWidow("in their words.")}</h2>
+      </div>
+
+      <div class="testimonial-right">
+        <div class="testimonial-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">{noWidow(testimonials[0].quote)}</p>
+          <div class="quote-attribution">
+            <span class="quote-name">{noWidow(testimonials[0].name)}</span>
+            <span class="quote-role">{noWidow(testimonials[0].role)}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. Next project -->
+  {nextEntry && nextEntry.id !== entry.id && (
+    <div class="cs-next">
+      <a href={`/work/${nextEntry.id.replace(/\.md$/, '')}`} class="next-link">
+        <span class="next-label">Next project</span>
+        <span class="next-title">{noWidow(nextEntry.data.title)}</span>
+        <span class="next-arrow">→</span>
+      </a>
+    </div>
+  )}
+
+</Layout>
+
+<style>
+  :root {
+    --px: clamp(24px, 6vw, 80px);
+    --py: clamp(60px, 8vw, 96px);
+  }
+
+  /* Hero */
+  .cs-hero {
+    padding: calc(24px + 18px + 56px) var(--px) clamp(32px, 4vw, 48px);
+  }
+  .cs-services {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 24px;
+  }
+  .cs-title {
+    font-size: clamp(2.75rem, 7vw, 8rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #111111;
+    max-width: 16ch;
+  }
+
+  /* Summary + meta */
+  .cs-intro {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 80px;
+    padding: clamp(32px, 4vw, 48px) var(--px) var(--py);
+    border-top: 0.5px solid #BBBBBB;
+  }
+  .cs-summary p {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #333333;
+  }
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+  .meta-row:first-child { border-top: 0.5px solid #E5E4E0; }
+  .meta-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    flex-shrink: 0;
+  }
+  .meta-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    text-align: right;
+  }
+  .meta-value a { color: #111111; }
+
+  /* Accordion */
+  .cs-accordion {
+    padding: 0 var(--px) var(--py);
+  }
+  .accordion-heading {
+    font-size: 36px;
+    font-weight: 600;
+    color: #111111;
+    margin-bottom: 40px;
+  }
+  .accordion-item {
+    border-top: 0.5px solid #E5E4E0;
+  }
+  .accordion-item:last-of-type {
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+  .accordion-item summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+    user-select: none;
+  }
+  .accordion-item summary::-webkit-details-marker { display: none; }
+  .accordion-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111111;
+  }
+  .accordion-icon {
+    font-size: 20px;
+    font-weight: 300;
+    color: #333333;
+    line-height: 1;
+  }
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .accordion-inner {
+    padding-bottom: 36px;
+  }
+  .accordion-inner p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #333333;
+    max-width: 80ch;
+  }
+
+  /* Photo grid */
+  .case-grid { display: flex; flex-direction: column; gap: 2rem; padding: 0 var(--px) var(--py); }
+  .case-grid__full { width: 100%; }
+  .case-grid__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .case-grid__trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+  .case-grid__quad { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 2rem; }
+  .case-grid__split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; }
+  .case-grid__split .split-left { display: flex; flex-direction: column; gap: 2rem; }
+  .case-grid__split .split-left img { width: 100%; height: auto; display: block; flex: 1; }
+  .case-grid__split .split-right img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-wrap { position: relative; }
+  .sound-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(17, 17, 17, 0.65);
+    color: #F7F6F2;
+    border: none;
+    padding: 6px 10px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.15s ease;
+  }
+  .sound-btn:hover { background: rgba(17, 17, 17, 0.9); }
+  .case-grid__reel { display: flex; justify-content: center; width: 100%; padding: 0; }
+  .case-grid__reel video { width: 100%; max-width: 500px; aspect-ratio: 9 / 16; object-fit: cover; display: block; }
+
+  /* Testimonial */
+  .cs-testimonial {
+    padding: var(--py) var(--px);
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .testimonial-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-heading {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #111111;
+  }
+
+  .testimonial-card {
+    background: #F0EFEB;
+    padding: clamp(32px, 4vw, 48px);
+  }
+
+  .quote-mark {
+    display: block;
+    font-size: clamp(64px, 8vw, 96px);
+    font-weight: 700;
+    line-height: 0.85;
+    color: #111111;
+    margin-bottom: 20px;
+  }
+
+  .quote-text {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: #111111;
+    margin-bottom: 32px;
+  }
+
+  .quote-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .quote-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #888888;
+  }
+
+  .quote-role {
+    font-size: 13px;
+    font-weight: 300;
+    color: #888888;
+  }
+
+
+  /* Next project */
+  .cs-next {
+    border-top: 0.5px solid #E5E4E0;
+    padding: var(--py) var(--px);
+  }
+  .next-link {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+  }
+  .next-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    flex-shrink: 0;
+  }
+  .next-title {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 300;
+    color: #111111;
+    letter-spacing: -0.01em;
+  }
+  .next-arrow {
+    font-size: 24px;
+    color: #888888;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .cs-intro {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .case-grid__pair {
+      grid-template-columns: 1fr;
+    }
+    .case-grid__trio {
+      grid-template-columns: 1fr;
+    }
+    .case-grid__split {
+      grid-template-columns: 1fr;
+    }
+    .case-grid__quad {
+      grid-template-columns: 1fr 1fr;
+    }
+    .testimonial-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .next-link { flex-wrap: wrap; }
+  }
+
+  @media (max-width: 480px) {
+    .case-grid__quad {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Accordion
+  document.querySelectorAll<HTMLDetailsElement>('.accordion-item').forEach((details) => {
+    const summary = details.querySelector('summary')!;
+    const body    = details.querySelector<HTMLElement>('.accordion-body')!;
+    const icon    = details.querySelector<HTMLElement>('.accordion-icon')!;
+
+    if (details.open) {
+      requestAnimationFrame(() => { body.style.maxHeight = body.scrollHeight + 'px'; });
+    } else {
+      body.style.maxHeight = '0px';
+    }
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      if (details.open) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          body.style.maxHeight = '0px';
+        }));
+        body.addEventListener('transitionend', () => details.removeAttribute('open'), { once: true });
+        icon.textContent = '+';
+      } else {
+        details.setAttribute('open', '');
+        icon.textContent = '−';
+        requestAnimationFrame(() => {
+          body.style.maxHeight = body.scrollHeight + 'px';
+          body.addEventListener('transitionend', () => {
+            body.style.maxHeight = 'none';
+          }, { once: true });
+        });
+      }
+    });
+  });
+
+  // Sound toggle
+  document.querySelectorAll<HTMLButtonElement>('.sound-btn').forEach(btn => {
+    const video = btn.previousElementSibling as HTMLVideoElement;
+    btn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      btn.textContent = video.muted ? 'SOUND OFF' : 'SOUND ON';
+    });
+  });
+</script>

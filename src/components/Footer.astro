@@ -1,0 +1,218 @@
+---
+import wordmarkSvgRaw from '../assets/brand/sett-wordmark.svg?raw';
+const wordmarkSvg = wordmarkSvgRaw.replace(/<\?xml[^>]*\?>\s*/, '');
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+      <div class="footer-cta">
+        <h2 class="footer-headline">Setting up brands that value their business.</h2>
+        <a href="/contact" class="footer-cta-link">Start a new project</a>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/work">Work</a>
+        <a href="/about">About</a>
+        <a href="/services">Services</a>
+        <a href="/contact">Contact</a>
+      </nav>
+
+      <div class="footer-contact">
+        <p class="footer-contact-label">Contact</p>
+        <a href="mailto:hello@settagency.com" class="footer-email">hello@settagency.com</a>
+        <a href="tel:+38763031859" class="footer-phone">+387 63 031 859</a>
+      </div>
+
+    </div>
+
+    <div class="footer-wordmark" aria-hidden="true">
+      <Fragment set:html={wordmarkSvg} />
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 Sett Agency</p>
+      <ul class="footer-social">
+        <li><a href="https://www.linkedin.com/company/sett-agency/?viewAsMember=true" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/sett.agency/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="#">Behance</a></li>
+      </ul>
+      <p class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <span aria-hidden="true">·</span>
+        <a href="#">Terms &amp; Conditions</a>
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 0;
+    min-height: 100vh;
+    background: #111111;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .footer-inner {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(64px, 8vw, 120px) 48px 32px 48px;
+  }
+
+  /* Three-column top */
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  /* CTA */
+  .site-footer .footer-headline {
+    font-size: clamp(42px, 4.5vw, 62px);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #F7F6F2;
+    margin-bottom: 24px;
+  }
+  .site-footer .footer-cta-link {
+    font-size: 18px;
+    font-weight: 400;
+    color: #F7F6F2;
+    text-decoration: underline;
+    text-decoration-color: #444444;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s ease;
+  }
+  .site-footer .footer-cta-link:hover { text-decoration-color: #F7F6F2; }
+
+  /* Menu */
+  .site-footer .footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .site-footer .footer-nav a {
+    font-size: 22px;
+    font-weight: 300;
+    color: #888888;
+    transition: color 0.2s ease;
+  }
+  .site-footer .footer-nav a:hover { color: #F7F6F2; }
+
+  /* Contact */
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  .site-footer .footer-contact-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 4px;
+  }
+  .site-footer .footer-contact a {
+    font-size: 18px;
+    font-weight: 300;
+    transition: color 0.2s ease;
+  }
+  .site-footer .footer-email { color: #F7F6F2; }
+  .site-footer .footer-phone { color: #888888; }
+  .site-footer .footer-contact a:hover { color: #F7F6F2; }
+
+  /* Wordmark fills remaining space; SVG sits at bottom of that section, above the bar */
+  .footer-wordmark {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 40px;
+    color: #F7F6F2;
+    pointer-events: none;
+  }
+
+  :global(.site-footer .footer-wordmark svg) {
+    width: clamp(224px, 33.6vw, 520px);
+    height: auto;
+    display: block;
+    fill: currentColor;
+  }
+  :global(.site-footer .footer-wordmark svg path) {
+    fill: currentColor;
+  }
+
+  /* Bottom bar: 3-column grid so social is truly centred */
+  .footer-bottom {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 0.5px solid #2A2A2A;
+  }
+  .footer-copyright {
+    font-size: 13px;
+    font-weight: 500;
+    color: #888888;
+    line-height: 1;
+  }
+  .footer-social {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    justify-self: center;
+  }
+  .footer-social a {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #888888;
+    transition: color 0.2s ease;
+  }
+  .footer-social a:hover { color: #F7F6F2; }
+  .footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-self: end;
+    font-size: 13px;
+    font-weight: 400;
+    color: #888888;
+  }
+  .footer-legal a {
+    color: #888888;
+    transition: color 0.2s ease;
+  }
+  .footer-legal a:hover { color: #F7F6F2; }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .footer-contact { align-items: flex-start; }
+    .footer-bottom {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .footer-social { justify-self: start; }
+    .footer-legal { justify-self: start; }
+    .footer-wordmark { display: none; }
+  }
+</style>

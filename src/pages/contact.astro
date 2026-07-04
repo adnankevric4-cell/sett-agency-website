@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { noWidow } from '../utils/noWidow';
+---
+
+<Layout
+  title="Contact — Sett Agency"
+  description="We work with organisations that take their brand seriously. Tell us what you're working on."
+>
+  <main>
+
+    <!-- Video -->
+    <section class="ct-video">
+      <div class="video-inner">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+          <source src="/contact/contact-media.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+
+    <!-- Headline -->
+    <section class="ct-headline-section">
+      <h1 class="ct-headline">{noWidow("Good work starts with a conversation.")}</h1>
+    </section>
+
+    <!-- Info -->
+    <section class="ct-info">
+      <div class="ct-inner">
+
+        <div class="ct-left">
+          <p class="ct-body">{noWidow("We work with organisations that take their brand seriously. If that sounds like you, tell us what you're working on.")}</p>
+          <div class="ct-contact-links">
+            <a href="mailto:hello@settagency.com" class="ct-email">hello@settagency.com</a>
+            <a href="tel:+38763031859" class="ct-phone">+387 63 031 859</a>
+          </div>
+        </div>
+
+        <div class="ct-right">
+          <div class="info-row">
+            <span class="info-label">New projects</span>
+            <a href="mailto:hello@settagency.com" class="info-value">hello@settagency.com</a>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Based in</span>
+            <span class="info-value">Sarajevo, BA</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Response time</span>
+            <span class="info-value">Within 24 hours</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Socials</span>
+            <span class="info-value info-socials">
+              <a href="https://www.linkedin.com/company/sett-agency/?viewAsMember=true" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <span aria-hidden="true">·</span>
+              <a href="https://www.instagram.com/sett.agency/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <span aria-hidden="true">·</span>
+              <a href="#">Behance</a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --px: clamp(24px, 6vw, 80px);
+    --py: clamp(60px, 8vw, 96px);
+  }
+
+  /* ── Video ────────────────────────────────────────────────────── */
+  .ct-video {
+    background: #111111;
+  }
+
+  .video-inner {
+    height: 55vh;
+    background: #111111;
+    overflow: hidden;
+  }
+
+  /* Header: white logo + hamburger over dark video */
+  :global(#siteHeader:not(.scrolled):not(.nav-open) .site-logo) {
+    color: #F7F6F2;
+  }
+  :global(#siteHeader:not(.scrolled):not(.nav-open) .ham-line) {
+    background: #F7F6F2;
+  }
+
+  /* ── Headline ─────────────────────────────────────────────────── */
+  .ct-headline-section {
+    background: #FFFFFF;
+    padding: clamp(48px, 6vw, 80px) var(--px) clamp(40px, 5vw, 64px);
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .ct-headline {
+    font-size: clamp(2.75rem, 7vw, 8rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #111111;
+  }
+
+  /* ── Info section ─────────────────────────────────────────────── */
+  .ct-info {
+    background: #FFFFFF;
+    padding: var(--py) var(--px) calc(var(--py) * 1.5);
+  }
+
+  .ct-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: start;
+  }
+
+  /* Left */
+  .ct-body {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #111111;
+    margin-bottom: 40px;
+    max-width: 44ch;
+  }
+
+  .ct-contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ct-email {
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300;
+    color: #111111;
+    transition: color 0.2s ease;
+  }
+
+  .ct-email:hover { color: #888888; }
+
+  .ct-phone {
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300;
+    color: #888888;
+    transition: color 0.2s ease;
+  }
+
+  .ct-phone:hover { color: #111111; }
+
+  /* Right */
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .info-row:first-child {
+    border-top: 0.5px solid #E5E4E0;
+  }
+
+  .info-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    flex-shrink: 0;
+  }
+
+  .info-value {
+    font-size: 15px;
+    font-weight: 300;
+    color: #111111;
+    text-align: right;
+  }
+
+  a.info-value,
+  .info-value a {
+    color: #111111;
+    transition: color 0.2s ease;
+  }
+
+  a.info-value:hover,
+  .info-value a:hover { color: #888888; }
+
+  .info-socials {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .info-socials span {
+    color: #BBBBBB;
+  }
+
+  /* ── Mobile ──────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .ct-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .ct-body { max-width: none; }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  if (header) {
+    const threshold = window.innerHeight * 0.8;
+    const update = () => header.classList.toggle('scrolled', window.scrollY > threshold);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sett Agency — Premium Digital Agency for Education</title>
+  <meta name="description" content="Sett Agency is a premium creative digital agency exclusively serving educational institutions. Web design, branding, AI integration, and digital marketing for schools, universities, and edtech." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="animations.css" />
+</head>
+<body>
+
+  <!-- Skip to content for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ─── NAVBAR ─────────────────────────────────── -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container navbar__inner">
+      <a href="#" class="navbar__logo" aria-label="Sett Agency home">
+        <img src="logo.svg" alt="Sett Agency Logo" style="height: 48px; width: auto;" />
+      </a>
+      <nav class="navbar__links" aria-label="Primary navigation">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#contact" class="nav-link nav-link--cta">Get in touch</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      <a href="#services" class="mobile-nav__link">Services</a>
+      <a href="#about" class="mobile-nav__link">About</a>
+      <a href="#work" class="mobile-nav__link">Work</a>
+      <a href="#contact" class="mobile-nav__link mobile-nav__link--cta">Get in touch</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <!-- ─── HERO ──────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__bg" aria-hidden="true">
+        <img src="hero-bg.png" alt="" class="hero__bg-img" width="1920" height="1080" />
+        <div class="hero__overlay"></div>
+      </div>
+      <div class="hero__noise" aria-hidden="true"></div>
+
+      <div class="container hero__content">
+        <div class="hero__left">
+          <div class="hero__badge">
+            <span class="badge-dot"></span>
+            Exclusively for Education
+          </div>
+          <h1 id="hero-heading" class="hero__title">
+            <span class="hero-word" style="--i:0">Education</span>
+            <span class="hero-word" style="--i:1">deserves</span><br />
+            <span class="hero-word gradient-text" style="--i:2">world-class</span><br />
+            <span class="hero-word" style="--i:3">digital</span>
+            <span class="hero-word" style="--i:4">presence.</span>
+          </h1>
+          <p class="hero__subtitle">
+            Sett Agency is a premium creative agency at the intersection of creativity, strategy, and AI — built entirely for educational institutions.
+          </p>
+          <div class="hero__actions">
+            <a href="#contact" class="btn btn--primary">Start a project</a>
+            <a href="#work" class="btn btn--ghost">View our work</a>
+          </div>
+        </div>
+
+        <div class="hero__right" aria-hidden="true">
+          <div class="hero__stats-panel">
+            <div class="hero__stat-item">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Institutions served</span>
+            </div>
+            <div class="hero__stat-sep"></div>
+            <div class="hero__stat-item">
+              <span class="stat-number">8+</span>
+              <span class="stat-label">Countries reached</span>
+            </div>
+            <div class="hero__stat-sep"></div>
+            <div class="hero__stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Education sector focus</span>
+            </div>
+            <div class="hero__stat-sep"></div>
+            <div class="hero__stat-item">
+              <span class="stat-number">5★</span>
+              <span class="stat-label">Client satisfaction</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ─── MARQUEE ────────────────────────────────── -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Web Design</span><span class="dot">·</span>
+        <span>Branding</span><span class="dot">·</span>
+        <span>AI Integration</span><span class="dot">·</span>
+        <span>Digital Marketing</span><span class="dot">·</span>
+        <span>Content Creation</span><span class="dot">·</span>
+        <span>UX Strategy</span><span class="dot">·</span>
+        <span>Automation</span><span class="dot">·</span>
+        <span>Visual Identity</span><span class="dot">·</span>
+        <!-- Duplicate for seamless loop -->
+        <span>Web Design</span><span class="dot">·</span>
+        <span>Branding</span><span class="dot">·</span>
+        <span>AI Integration</span><span class="dot">·</span>
+        <span>Digital Marketing</span><span class="dot">·</span>
+        <span>Content Creation</span><span class="dot">·</span>
+        <span>UX Strategy</span><span class="dot">·</span>
+        <span>Automation</span><span class="dot">·</span>
+        <span>Visual Identity</span><span class="dot">·</span>
+      </div>
+    </div>
+
+    <!-- ─── SERVICES ───────────────────────────────── -->
+    <section class="section services" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-tag">What we do</p>
+          <h2 id="services-heading" class="section-title">Agency-level quality<br />educational institutions rarely receive.</h2>
+        </div>
+
+        <div class="services__grid">
+          <article class="service-card" tabindex="0">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Web Design &amp; Development</h3>
+            <p class="service-card__desc">Bespoke, high-performance websites engineered for enrollment conversion, student engagement, and institutional credibility.</p>
+            <div class="service-card__arrow" aria-hidden="true">→</div>
+          </article>
+
+          <article class="service-card" tabindex="0">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Branding &amp; Visual Identity</h3>
+            <p class="service-card__desc">Strategic brand systems that reflect academic excellence — built to inspire trust, attract talent, and stand apart.</p>
+            <div class="service-card__arrow" aria-hidden="true">→</div>
+          </article>
+
+          <article class="service-card" tabindex="0">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Digital Marketing</h3>
+            <p class="service-card__desc">Data-driven campaigns that fill classrooms, boost enrollment, and build lasting community — targeted, measurable, impactful.</p>
+            <div class="service-card__arrow" aria-hidden="true">→</div>
+          </article>
+
+          <article class="service-card" tabindex="0">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Content Creation</h3>
+            <p class="service-card__desc">Compelling narratives, stunning visuals, and strategic content that communicates your institution's unique value to the world.</p>
+            <div class="service-card__arrow" aria-hidden="true">→</div>
+          </article>
+
+          <article class="service-card service-card--featured" tabindex="0">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 12l8-8M20 12V4h-8"/>
+              </svg>
+            </div>
+            <div class="service-card__badge">Signature Service</div>
+            <h3 class="service-card__title">AI Integration &amp; Automation</h3>
+            <p class="service-card__desc">We embed intelligence into educational operations — AI-powered admissions, personalised learning flows, administrative automation, and smart communications that scale with your institution.</p>
+            <div class="service-card__arrow" aria-hidden="true">→</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PHILOSOPHY ─────────────────────────────── -->
+    <section class="section philosophy" id="about" aria-labelledby="philosophy-heading">
+      <div class="container philosophy__inner">
+        <div class="philosophy__text">
+          <p class="section-tag">Our philosophy</p>
+          <h2 id="philosophy-heading" class="section-title">We only work with<br />one industry.<br /><span class="gradient-text">On purpose.</span></h2>
+          <p class="philosophy__body">Most agencies treat education as just another vertical. We built Sett Agency exclusively for the education sector — because we believe the institutions shaping the world's future deserve a partner who truly understands them.</p>
+          <p class="philosophy__body">Our founder Adnan Kevric brings a rare combination of AI expertise, graphic design mastery, and a Master's in Marketing from TBS Education in Barcelona. That's the level of insight every Sett Agency engagement starts with.</p>
+          <a href="#contact" class="btn btn--primary">Work with us</a>
+        </div>
+        <div class="philosophy__visual">
+          <div class="phil-cards">
+            <div class="phil-card">
+              <div class="phil-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+              <div class="phil-card__content">
+                <div class="phil-card__metric">+340% organic reach</div>
+                <div class="phil-card__label">Edtech Startup</div>
+              </div>
+            </div>
+            <div class="phil-card phil-card--accent">
+              <div class="phil-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg></div>
+              <div class="phil-card__content">
+                <div class="phil-card__metric">+58% enrollment</div>
+                <div class="phil-card__label">International University</div>
+              </div>
+              <div class="phil-card__tag">AI-powered</div>
+            </div>
+            <div class="phil-card">
+              <div class="phil-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg></div>
+              <div class="phil-card__content">
+                <div class="phil-card__metric">12 campuses unified</div>
+                <div class="phil-card__label">Secondary School Network</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── WORK / CASE STUDIES ────────────────────── -->
+    <section class="section work" id="work" aria-labelledby="work-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-tag">Selected work</p>
+          <h2 id="work-heading" class="section-title">Built for institutions<br />that lead.</h2>
+        </div>
+        <div class="work__grid">
+          <article class="work-card" tabindex="0">
+            <div class="work-card__bg work-card__bg--1" aria-hidden="true"></div>
+            <div class="work-card__content">
+              <p class="work-card__type">Branding &amp; Web</p>
+              <h3 class="work-card__title">EduForward University</h3>
+              <p class="work-card__result">Complete rebrand + new website drove a 58% increase in international enrollment enquiries within 6 months.</p>
+            </div>
+          </article>
+
+          <article class="work-card" tabindex="0">
+            <div class="work-card__bg work-card__bg--2" aria-hidden="true"></div>
+            <div class="work-card__content">
+              <p class="work-card__type">AI Integration</p>
+              <h3 class="work-card__title">LearnPath Edtech</h3>
+              <p class="work-card__result">AI admissions funnel reduced manual admin by 70% and cut response time from 48h to under 2h.</p>
+            </div>
+          </article>
+
+          <article class="work-card" tabindex="0">
+            <div class="work-card__bg work-card__bg--3" aria-hidden="true"></div>
+            <div class="work-card__content">
+              <p class="work-card__type">Digital Marketing</p>
+              <h3 class="work-card__title">Meridian Schools</h3>
+              <p class="work-card__result">Strategic content campaign achieved 340% organic reach growth and doubled application volume.</p>
+            </div>
+          </article>
+
+          <article class="work-card" tabindex="0">
+            <div class="work-card__bg work-card__bg--4" aria-hidden="true"></div>
+            <div class="work-card__content">
+              <p class="work-card__type">Content &amp; Strategy</p>
+              <h3 class="work-card__title">Nova Academy</h3>
+              <p class="work-card__result">Unified visual identity across 6 social platforms increased follower engagement by 215%.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TESTIMONIALS ───────────────────────────── -->
+    <section class="section testimonials" id="testimonials" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <p class="section-tag">Client voices</p>
+          <h2 id="testimonials-heading" class="section-title">What our partners say.</h2>
+        </div>
+        <div class="testimonials__grid">
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__quote">"Sett Agency understood the education sector from day one. They didn't just build us a website — they built us a strategic asset."</p>
+            <footer class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">DM</div>
+              <div>
+                <cite class="testimonial-card__name">Dr. Mia Albrecht</cite>
+                <span class="testimonial-card__role">Head of Marketing, EduForward University</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__quote">"The AI automation they built for our admissions process is transformative. We went from drowning in admin to fully focused on students."</p>
+            <footer class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">JR</div>
+              <div>
+                <cite class="testimonial-card__name">James Rodriguez</cite>
+                <span class="testimonial-card__role">CEO, LearnPath Edtech</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__quote">"Premium, precise, and genuinely invested in our mission. Sett Agency operates at a level we rarely see from digital agencies in education."</p>
+            <footer class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">SK</div>
+              <div>
+                <cite class="testimonial-card__name">Sarah Kim</cite>
+                <span class="testimonial-card__role">Director, Meridian School Network</span>
+              </div>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA ────────────────────────────────────── -->
+    <section class="section cta-section" id="contact" aria-labelledby="cta-heading">
+      <div class="cta-section__bg" aria-hidden="true">
+        <div class="cta-orb cta-orb--1"></div>
+        <div class="cta-orb cta-orb--2"></div>
+        <div class="cta-orb cta-orb--3"></div>
+        <div class="cta-grid-lines"></div>
+      </div>
+      <div class="container cta-section__inner">
+        <div class="cta-section__content">
+          <p class="section-tag cta-animate cta-animate--1">Ready to elevate?</p>
+          <h2 id="cta-heading" class="section-title cta-animate cta-animate--2">Your institution deserves<br /><span class="gradient-text">more than average.</span></h2>
+          <p class="cta-section__body cta-animate cta-animate--3">We take on a limited number of partners each quarter to ensure every project receives our full attention. Let's talk about yours.</p>
+          <div class="cta-section__actions cta-animate cta-animate--4">
+            <a href="mailto:hello@settagency.com" class="btn btn--primary btn--large cta-btn-glow">hello@settagency.com</a>
+          </div>
+          <p class="cta-section__note cta-animate cta-animate--5">Education sector only · Response within 24 hours</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="navbar__logo" aria-label="Sett Agency home" style="margin-bottom: var(--space-4);">
+          <img src="logo.svg" alt="Sett Agency Logo" style="height: 64px; width: auto;" />
+        </a>
+        <p class="footer__tagline">Creativity · Strategy · AI<br />Exclusively for education.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="footer__copy">© 2026 Sett Agency. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

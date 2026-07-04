@@ -1,0 +1,807 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { noWidow } from '../utils/noWidow';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>('../assets/work/**/*.png');
+
+const brandImg1 = (await allImages['../assets/work/castle-college/media-3.png']?.())?.default;
+const brandImg2 = (await allImages['../assets/work/polam-school/media-6.png']?.())?.default;
+const webImg1   = (await allImages['../assets/work/agdal-nuhanovic/media-6.png']?.())?.default;
+const webImg2   = (await allImages['../assets/work/redshift-education/media-16.png']?.())?.default;
+const contImg1  = (await allImages['../assets/work/dope-jewelry-launch-campaign/media-1.png']?.())?.default;
+const contImg2  = (await allImages['../assets/work/stirling-education/media-22.png']?.())?.default;
+---
+
+<Layout
+  title="Services — Sett Agency"
+  description="Brand identity, web, content and digital marketing. Built around how you actually grow."
+>
+  <main>
+
+    <!-- 1. Hero -->
+    <section class="sv-hero">
+      <p class="sv-label">What we do</p>
+      <h1 class="sv-headline">{noWidow("Brand, web,")}<br />{noWidow("content, marketing.")}</h1>
+      <p class="sv-sub">{noWidow("Four disciplines, built to work together.")}</p>
+    </section>
+
+    <!-- 2. Services: fixed sidebar + scrolling content -->
+    <section class="sv-services" aria-label="Services">
+
+      <aside class="sv-sidebar">
+        <p class="sidebar-label">Services</p>
+        <nav class="sidebar-nav" aria-label="Service sections">
+          <a href="#brand-identity" class="sidebar-link is-active">Brand Identity</a>
+          <a href="#web" class="sidebar-link">Web</a>
+          <a href="#content" class="sidebar-link">Content</a>
+          <a href="#digital-marketing" class="sidebar-link">Digital Marketing</a>
+        </nav>
+      </aside>
+
+      <div class="sv-content">
+
+        <div id="brand-identity" class="service-section">
+          <h2 class="service-heading">{noWidow("Brand Identity")}</h2>
+          <p class="service-lead">{noWidow("Your brand is how people decide whether to trust you before they speak to you.")}</p>
+          <p class="service-body">{noWidow("We build identity systems that work across every format, from the first mark to the full guidelines document. The goal is a brand your team can apply with confidence and your audience can recognise without thinking. Consistency compounds. A strong identity means every touchpoint is doing the same job.")}</p>
+          <p class="deliverables-label">Deliverables</p>
+          <ul class="deliverables">
+            <li>Logo system</li>
+            <li>Visual identity</li>
+            <li>Brand guidelines</li>
+            <li>Typography system</li>
+            <li>Colour palette</li>
+            <li>Brand voice and tone</li>
+            <li>Application templates</li>
+          </ul>
+          <div class="img-row">
+            <div class="img-placeholder">
+              {brandImg1 ? (
+                <Image src={brandImg1} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : <span>Project image</span>}
+            </div>
+            <div class="img-placeholder">
+              {brandImg2 ? (
+                <Image src={brandImg2} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : <span>Project image</span>}
+            </div>
+          </div>
+        </div>
+
+        <div id="web" class="service-section">
+          <h2 class="service-heading">{noWidow("Web")}</h2>
+          <p class="service-lead">{noWidow("A website that performs is designed around what your audience needs to do.")}</p>
+          <p class="service-body">{noWidow("We design and build sites that are fast, focused, and built to convert. Every layout decision is grounded in how your visitors actually behave. No wasted pages, no buried calls to action. The technical build is as considered as the design, and the result loads quickly on any device.")}</p>
+          <p class="deliverables-label">Deliverables</p>
+          <ul class="deliverables">
+            <li>UX strategy</li>
+            <li>Wireframes</li>
+            <li>Visual design</li>
+            <li>Development</li>
+            <li>CMS integration</li>
+            <li>Performance optimisation</li>
+            <li>Launch support</li>
+          </ul>
+          <div class="img-row">
+            <div class="img-placeholder">
+              {webImg1 ? (
+                <Image src={webImg1} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : <span>Project image</span>}
+            </div>
+            <div class="img-placeholder">
+              {webImg2 ? (
+                <Image src={webImg2} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : <span>Project image</span>}
+            </div>
+          </div>
+        </div>
+
+        <div id="content" class="service-section">
+          <h2 class="service-heading">{noWidow("Content")}</h2>
+          <p class="service-lead">{noWidow("Good content gives people a reason to come back. It starts with knowing what to say.")}</p>
+          <p class="service-body">{noWidow("We write for people, not search engines, though it tends to do both. Strategy comes first: what your audience needs to hear, when, and where. Then we write it. Clearly, consistently, without filler. Every word justifies its place on the page.")}</p>
+          <p class="deliverables-label">Deliverables</p>
+          <ul class="deliverables">
+            <li>Content strategy</li>
+            <li>Copywriting</li>
+            <li>Editorial planning</li>
+            <li>SEO</li>
+            <li>Social content</li>
+            <li>Email sequences</li>
+            <li>Tone of voice guidelines</li>
+          </ul>
+          <div class="img-row">
+            <div class="img-placeholder">
+              {contImg1 ? (
+                <Image src={contImg1} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : <span>Project image</span>}
+            </div>
+            <div class="img-placeholder">
+              {contImg2 ? (
+                <Image src={contImg2} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : <span>Project image</span>}
+            </div>
+          </div>
+        </div>
+
+        <div id="digital-marketing" class="service-section">
+          <h2 class="service-heading">{noWidow("Digital Marketing")}</h2>
+          <p class="service-lead">{noWidow("Presence without consistency is noise. We build systems that keep you visible.")}</p>
+          <p class="service-body">{noWidow("We run campaigns that are measured from the first day. Paid and organic, short-term results and long-term growth. The focus is always on what the numbers are telling you, not what looks good in a report. Clear attribution, clear direction.")}</p>
+          <p class="deliverables-label">Deliverables</p>
+          <ul class="deliverables">
+            <li>Paid search</li>
+            <li>Organic growth strategy</li>
+            <li>Email marketing</li>
+            <li>Analytics setup</li>
+            <li>Campaign management</li>
+            <li>Reporting and attribution</li>
+            <li>Channel strategy</li>
+          </ul>
+          <div class="img-row">
+            <div class="img-placeholder">
+              <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+                <source src="/work/dope-jewelry-bean-up/media-1.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="img-placeholder">
+              <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+                <source src="/work/dope-jewelry-launch-campaign/media-1.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    {/* Process section — saved, not rendered
+    <section class="sv-process" aria-label="How we work">
+      <p class="process-label">How we work</p>
+      <div class="process-grid">
+
+        <div class="process-step" data-photo="1">
+          <span class="step-num">01</span>
+          <h3 class="step-title">Discovery</h3>
+          <p class="step-body">We start by understanding your business, your audience, and where you want to go.</p>
+        </div>
+
+        <div class="process-step" data-photo="2">
+          <span class="step-num">02</span>
+          <h3 class="step-title">Strategy</h3>
+          <p class="step-body">A clear direction before any design or copy. What to say, where to say it, and why.</p>
+        </div>
+
+        <div class="process-step" data-photo="3">
+          <span class="step-num">03</span>
+          <h3 class="step-title">Build</h3>
+          <p class="step-body">Considered work, not rushed output. Each element earns its place.</p>
+        </div>
+
+        <div class="process-step" data-photo="4">
+          <span class="step-num">04</span>
+          <h3 class="step-title">Launch</h3>
+          <p class="step-body">A clean handover, with the tools and guidance to keep things running.</p>
+        </div>
+
+      </div>
+    </section>
+    */}
+
+    <!-- 4. Testimonial -->
+    <section class="sv-testimonial">
+      <div class="testimonial-grid">
+
+        <div class="testimonial-left">
+          <p class="testimonial-label">{noWidow("What clients say")}</p>
+          <h2 class="testimonial-heading">{noWidow("The work,")}<br />{noWidow("in their words.")}</h2>
+        </div>
+
+        <div class="testimonial-right">
+          <div class="testimonial-card">
+            <span class="quote-mark">&ldquo;</span>
+            <p class="quote-text">{noWidow("Working with Sett changed how we think about our school's presence. Parents tell us the website finally feels like us.")}</p>
+            <div class="quote-attribution">
+              <span class="quote-name">{noWidow("Sarah Mitchell")}</span>
+              <span class="quote-role">{noWidow("Head of Admissions, Long Close School")}</span>
+            </div>
+            <div class="t-counter" aria-live="polite">
+              <span class="t-num-current">01</span>
+              <span class="t-sep"> / </span>
+              <span class="t-num-total">01</span>
+              <span class="t-arrow" aria-hidden="true">→</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div class="cursor-image" aria-hidden="true">
+    <span class="cursor-label">Photo 1</span>
+  </div>
+</Layout>
+
+<style>
+  :root {
+    --px: clamp(24px, 6vw, 80px);
+    --py: clamp(60px, 8vw, 96px);
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────────── */
+  .sv-hero {
+    padding: calc(64px + clamp(48px, 6vw, 80px)) var(--px) var(--py);
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .sv-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 32px;
+  }
+
+  .sv-headline {
+    font-size: clamp(2.75rem, 7vw, 8rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin-bottom: 24px;
+  }
+
+  .sv-sub {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: #888888;
+  }
+
+  /* ── Services layout ──────────────────────────────────────────── */
+  .sv-services {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    align-items: start;
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  /* Sidebar */
+  .sv-sidebar {
+    position: sticky;
+    top: 64px;
+    align-self: start;
+    padding: clamp(36px, 5vw, 56px) 40px clamp(36px, 5vw, 56px) var(--px);
+    border-right: 0.5px solid #999999;
+    min-height: calc(100vh - 64px);
+  }
+
+  .sidebar-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 28px;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sidebar-link {
+    font-size: 17px;
+    font-weight: 400;
+    color: #BBBBBB;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    line-height: 1.4;
+  }
+
+  .sidebar-link:hover {
+    color: #555555;
+  }
+
+  .sidebar-link.is-active {
+    font-weight: 600;
+    color: #111111;
+  }
+
+  /* Content column */
+  .sv-content {
+    /* natural flow */
+  }
+
+  .service-section {
+    padding: clamp(48px, 6vw, 80px) clamp(40px, 5vw, 72px);
+  }
+
+  .service-section:last-child {
+    border-bottom: none;
+  }
+
+  .service-heading {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin-bottom: 32px;
+  }
+
+  .service-lead {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #111111;
+    margin-bottom: 20px;
+  }
+
+  .service-body {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #111111;
+    margin-bottom: 48px;
+  }
+
+  /* Deliverables */
+  .deliverables-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 0;
+  }
+
+  .deliverables {
+    list-style: none;
+    margin-bottom: 56px;
+  }
+
+  .deliverables li {
+    font-size: 17px;
+    font-weight: 300;
+    color: #888888;
+    padding: 14px 0;
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .deliverables li:first-child {
+    border-top: 0.5px solid #E5E4E0;
+  }
+
+  /* Image placeholders */
+  .img-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .img-placeholder {
+    background: #E5E4E0;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .img-placeholder span {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+  }
+
+  /* ── Testimonial ─────────────────────────────────────────────── */
+  .sv-testimonial {
+    padding: var(--py) var(--px);
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .testimonial-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-heading {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #111111;
+  }
+
+  .testimonial-card {
+    background: #F0EFEB;
+    padding: clamp(32px, 4vw, 48px);
+    cursor: pointer;
+  }
+
+  .t-counter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 28px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    gap: 8px;
+    align-items: center;
+  }
+  .t-num-current { color: #111111; }
+  .t-sep         { color: #555555; }
+  .t-num-total   { color: #555555; }
+  .t-arrow       { color: #555555; cursor: pointer; display: inline-block; }
+
+  .quote-mark {
+    display: block;
+    font-size: clamp(64px, 8vw, 96px);
+    font-weight: 700;
+    line-height: 0.85;
+    color: #111111;
+    margin-bottom: 20px;
+  }
+
+  .quote-text {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: #111111;
+    margin-bottom: 32px;
+  }
+
+  .quote-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .quote-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #888888;
+  }
+
+  .quote-role {
+    font-size: 13px;
+    font-weight: 300;
+    color: #888888;
+  }
+
+
+  /* ── Process ──────────────────────────────────────────────────── */
+  .sv-process {
+    padding: var(--py) var(--px) calc(var(--py) * 1.5);
+    background: #F0EFEB;
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .process-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 48px;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .process-step {
+    padding: 0 clamp(20px, 3vw, 36px);
+    border-left: 1px solid #E5E4E0;
+  }
+
+  .process-step:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .process-step:last-child {
+    padding-right: 0;
+  }
+
+  /* Diagonal cascade — each column pushed further down */
+  .process-step:nth-child(1) { padding-top: 0; }
+  .process-step:nth-child(2) { padding-top: clamp(48px,  6vw,  80px); }
+  .process-step:nth-child(3) { padding-top: clamp(96px,  12vw, 160px); }
+  .process-step:nth-child(4) { padding-top: clamp(144px, 18vw, 240px); }
+
+  .step-num {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 20px;
+  }
+
+  .step-title {
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #111111;
+    margin-bottom: 16px;
+  }
+
+  .step-body {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: #555555;
+  }
+
+  /* ── Cursor-following image ───────────────────────────────────── */
+  .cursor-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 200px;
+    background: #E5E4E0;
+    pointer-events: none;
+    z-index: 500;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cursor-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+  }
+
+  /* ── Mobile ───────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .testimonial-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .sv-services {
+      grid-template-columns: 1fr;
+    }
+
+    .sv-sidebar {
+      position: static;
+      min-height: unset;
+      padding: 24px var(--px);
+      border-right: none;
+      border-bottom: 0.5px solid #E5E4E0;
+    }
+
+    .sidebar-nav {
+      flex-direction: row;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .sidebar-link {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .service-section {
+      padding: clamp(40px, 6vw, 60px) var(--px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .process-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+    .process-step {
+      border-left: none;
+      border-top: 1px solid #E5E4E0;
+      padding: clamp(28px, 4vw, 40px) 0;
+    }
+    .process-step:nth-child(1),
+    .process-step:nth-child(2) { border-top: none; }
+    .process-step:nth-child(2n) { padding-left: clamp(20px, 3vw, 36px); border-left: 1px solid #E5E4E0; }
+    .process-step:nth-child(n) { padding-top: clamp(28px, 4vw, 40px); }
+  }
+
+  @media (max-width: 600px) {
+    .img-row { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .process-step,
+    .process-step:nth-child(2n) { padding-left: 0; border-left: none; border-top: 1px solid #E5E4E0; }
+    .process-step:nth-child(1) { border-top: none; }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { noWidow } from '../utils/noWidow';
+
+  // Testimonial slider
+  const testimonials = [
+    {
+      quote: "Working with Sett changed how we think about our school's presence. Parents tell us the website finally feels like us.",
+      name: 'Sarah Mitchell',
+      role: 'Head of Admissions, Long Close School',
+    },
+    {
+      quote: "Sett understood our network before we did. The whole system now feels coherent across every school.",
+      name: 'Placeholder Name',
+      role: 'Stirling Education',
+    },
+    {
+      quote: "Clear, calm, and exactly what we needed. The brand finally matches the school.",
+      name: 'Placeholder Name',
+      role: 'Polam School',
+    },
+  ];
+
+  const tCard       = document.querySelector<HTMLElement>('.testimonial-card');
+  const tQuoteText  = document.querySelector<HTMLElement>('.quote-text');
+  const tQuoteName  = document.querySelector<HTMLElement>('.quote-name');
+  const tQuoteRole  = document.querySelector<HTMLElement>('.quote-role');
+  const tNumCurrent = document.querySelector<HTMLElement>('.t-num-current');
+  const tNumTotal   = document.querySelector<HTMLElement>('.t-num-total');
+  let tCurrent = 0;
+  let autoTimer: ReturnType<typeof gsap.delayedCall> | null = null;
+
+  function tPad(n: number) { return String(n).padStart(2, '0'); }
+
+  function tUpdateCounter() {
+    if (tNumCurrent) tNumCurrent.textContent = tPad(tCurrent + 1);
+    if (tNumTotal)   tNumTotal.textContent   = tPad(testimonials.length);
+  }
+
+  function tGoTo(index: number) {
+    if (!tCard || !tQuoteText || !tQuoteName || !tQuoteRole) return;
+    gsap.to(tCard, {
+      opacity: 0, duration: 0.2, ease: 'power1.in',
+      onComplete() {
+        tCurrent = index;
+        tQuoteText.textContent = noWidow(testimonials[tCurrent].quote);
+        tQuoteName.textContent = noWidow(testimonials[tCurrent].name);
+        tQuoteRole.textContent = noWidow(testimonials[tCurrent].role);
+        tUpdateCounter();
+        gsap.to(tCard, { opacity: 1, duration: 0.4, ease: 'power1.out' });
+      },
+    });
+  }
+
+  function tAdvance() { tGoTo((tCurrent + 1) % testimonials.length); }
+
+  function tStartAuto() {
+    autoTimer = gsap.delayedCall(6, () => { tAdvance(); tStartAuto(); });
+  }
+  function tStopAuto() {
+    if (autoTimer) { autoTimer.kill(); autoTimer = null; }
+  }
+
+  tUpdateCounter();
+  if (testimonials.length > 1) {
+    tCard?.addEventListener('click', () => { tStopAuto(); tAdvance(); tStartAuto(); });
+    tCard?.addEventListener('mouseenter', tStopAuto);
+    tCard?.addEventListener('mouseleave', tStartAuto);
+    const tArrow = document.querySelector<HTMLElement>('.t-arrow');
+    if (tArrow) {
+      tArrow.addEventListener('mouseenter', () =>
+        gsap.to(tArrow, { x: 4, color: '#111111', duration: 0.2, ease: 'power1.out' }));
+      tArrow.addEventListener('mouseleave', () =>
+        gsap.to(tArrow, { x: 0, color: '#555555', duration: 0.2, ease: 'power1.out' }));
+      tArrow.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tStopAuto(); tAdvance(); tStartAuto();
+      });
+    }
+    tStartAuto();
+  }
+
+  // Sidebar active state via IntersectionObserver
+  const sections = document.querySelectorAll<HTMLElement>('.service-section');
+  const sidebarLinks = document.querySelectorAll<HTMLAnchorElement>('.sidebar-link');
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          sidebarLinks.forEach(link => {
+            link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    },
+    { rootMargin: '-10% 0px -70% 0px', threshold: 0 }
+  );
+
+  sections.forEach(section => sectionObserver.observe(section));
+
+  // Process cursor-following image
+  const cursorImg    = document.querySelector<HTMLElement>('.cursor-image');
+  const cursorLabel  = document.querySelector<HTMLElement>('.cursor-label');
+  const processArea  = document.querySelector<HTMLElement>('.sv-process');
+  const processCards = document.querySelectorAll<HTMLElement>('.process-step');
+
+  if (cursorImg && cursorLabel && processArea && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    let rafId: number | null = null;
+    let activePhoto: string | null = null;
+    let swapTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    function tick() {
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+      cursorImg.style.transform = `translate(${currentX + 24}px, ${currentY - 100}px)`;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    });
+
+    processArea.addEventListener('mouseenter', () => {
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    });
+
+    processArea.addEventListener('mouseleave', () => {
+      cursorImg!.style.opacity = '0';
+      activePhoto = null;
+      if (swapTimeout) { clearTimeout(swapTimeout); swapTimeout = null; }
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    });
+
+    processCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const photo = card.dataset.photo ?? '1';
+        if (activePhoto === photo) return;
+
+        if (swapTimeout) clearTimeout(swapTimeout);
+
+        if (activePhoto !== null) {
+          // cross-fade: out → swap label → in
+          cursorImg.style.opacity = '0';
+          swapTimeout = setTimeout(() => {
+            cursorLabel.textContent = `Photo ${photo}`;
+            activePhoto = photo;
+            cursorImg.style.opacity = '1';
+          }, 200);
+        } else {
+          cursorLabel.textContent = `Photo ${photo}`;
+          activePhoto = photo;
+          cursorImg.style.opacity = '1';
+        }
+      });
+    });
+  }
+</script>

@@ -1,0 +1,396 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { noWidow } from '../utils/noWidow';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>('../assets/work/**/*.png');
+const workEntries = await getCollection('work');
+const coverMap: Record<string, ImageMetadata | undefined> = {};
+const videoCoverMap: Record<string, string> = {};
+for (const entry of workEntries) {
+  const slug = entry.id.replace(/\.md$/, '');
+  const coverFile = entry.data.cover;
+  if (!coverFile) continue;
+  if (coverFile.endsWith('.mp4')) {
+    videoCoverMap[slug] = coverFile;
+  } else if (/\.(png|jpg|jpeg|webp)$/i.test(coverFile)) {
+    const mod = await allImages[`../assets/work/${slug}/${coverFile}`]?.();
+    coverMap[slug] = mod?.default;
+  }
+  // other extensions silently skipped — card shows placeholder
+}
+
+const projects = [
+  {
+    slug: 'long-close-school',
+    name: 'Long Close School',
+    desc: 'A heritage school rebuilt to convert.',
+    tag: 'BRAND + WEB REBUILD',
+    categories: ['brand', 'web'],
+    aspect: '4 / 3',
+  },
+  {
+    slug: 'dope-jewelry-bean-up',
+    name: 'Dope Jewelry: Bean Up Campaign',
+    desc: '3D ads built for paid social. A bean-shaped collection launched at scale.',
+    tag: '3D + PAID ADS',
+    categories: ['content', 'digital-marketing'],
+    aspect: '16 / 9',
+  },
+  {
+    slug: 'stirling-education',
+    name: 'Stirling Education',
+    desc: 'A full communication system for a global network.',
+    tag: 'BRAND + WEB + SOCIAL',
+    categories: ['brand', 'web', 'content'],
+    aspect: '4 / 3',
+  },
+  {
+    slug: 'redshift-education',
+    name: 'Redshift Education',
+    desc: 'A growing school network with a brand that scales.',
+    tag: 'BRAND + WEBSITE',
+    categories: ['brand', 'web'],
+    aspect: '3 / 2',
+  },
+  {
+    slug: 'advelop',
+    name: 'Advelop',
+    desc: 'Sixteen products, one shelf-clear system.',
+    tag: 'PACKAGING + LABEL SYSTEM',
+    categories: ['brand'],
+    aspect: '1 / 1',
+  },
+  {
+    slug: 'dope-jewelry-3d',
+    name: 'Dope Jewelry: 3D Launch Animation',
+    desc: 'A 3D launch animation built in Blender around the Dope symbol.',
+    tag: '3D + MOTION',
+    categories: ['content'],
+    aspect: '16 / 9',
+  },
+  {
+    slug: 'dope-jewelry',
+    name: 'Dope Jewelry',
+    desc: 'A brand launched from zero into a live store.',
+    tag: 'BRAND + SHOPIFY + 3D',
+    categories: ['brand', 'web'],
+    aspect: '3 / 2',
+  },
+  {
+    slug: 'dope-jewelry-launch-campaign',
+    name: 'Dope Jewelry: Launch Campaign',
+    desc: 'A brand launch shot in Sarajevo with a real community.',
+    tag: 'CAMPAIGN + PRODUCTION',
+    categories: ['content'],
+    aspect: '16 / 9',
+  },
+  {
+    slug: 'dope-jewelry-photography',
+    name: 'Dope Jewelry: Product Photography',
+    desc: 'Studio work, product-first and web-ready.',
+    tag: 'PRODUCT PHOTOGRAPHY',
+    categories: ['content'],
+    aspect: '4 / 3',
+  },
+  {
+    slug: 'polam-school',
+    name: 'Polam School',
+    desc: 'An identity pulled straight from inside the building.',
+    tag: 'BRAND + WEBSITE',
+    categories: ['brand', 'web'],
+    aspect: '1 / 1',
+  },
+  {
+    slug: 'castle-college',
+    name: 'Castle College',
+    desc: 'A new institution built from the ground up.',
+    tag: 'BRAND + WEBSITE',
+    categories: ['brand', 'web'],
+    aspect: '16 / 9',
+  },
+  {
+    slug: 'agdal-nuhanovic',
+    name: 'Agdal Nuhanović',
+    desc: 'A portfolio that gets out of the work\'s way.',
+    tag: 'LOGO + PORTFOLIO SITE',
+    categories: ['web'],
+    aspect: '16 / 9',
+  },
+  {
+    slug: 'bc-law-ltd',
+    name: 'BC Law Ltd',
+    desc: 'Authority without the legal clichés.',
+    tag: 'BRAND + WEBSITE',
+    categories: ['brand', 'web'],
+    aspect: '1 / 1',
+  },
+];
+---
+
+<Layout
+  title="Work — Sett Agency"
+  description="Branding, web and digital for brands that mean business."
+>
+  <main>
+
+    <!-- Hero -->
+    <section class="wk-hero">
+      <p class="wk-label">Our work</p>
+      <h1 class="wk-headline">{noWidow("Selected work.")}</h1>
+      <p class="wk-sub">{noWidow("Thirteen projects across branding, web and digital.")}</p>
+    </section>
+
+    <!-- Filter bar -->
+    <div class="wk-filters">
+      <div class="filter-row" role="group" aria-label="Filter projects by type">
+        <button class="filter-btn is-active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="brand">Brand</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="content">Content</button>
+        <button class="filter-btn" data-filter="digital-marketing">Digital Marketing</button>
+      </div>
+      <div class="filter-divider" aria-hidden="true"></div>
+    </div>
+
+    <!-- Project grid -->
+    <section class="wk-grid" aria-label="Projects">
+      {projects.map(project => (
+        <a
+          href={`/work/${project.slug}`}
+          class="project-card"
+          data-categories={project.categories.join(' ')}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="card-image">
+            <div class="card-img-inner">
+              {videoCoverMap[project.slug] ? (
+                <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+                  <source src={`/work/${project.slug}/${videoCoverMap[project.slug]}`} type="video/mp4" />
+                </video>
+              ) : coverMap[project.slug] ? (
+                <Image src={coverMap[project.slug]!} alt={project.name} style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : (
+                <span class="img-label">Project image</span>
+              )}
+            </div>
+          </div>
+          <div class="card-body">
+            <h2 class="card-name">{noWidow(project.name)}</h2>
+            <p class="card-desc">{noWidow(project.desc)}</p>
+            <span class="card-tag">{project.tag}</span>
+          </div>
+        </a>
+      ))}
+      <p class="empty-state" aria-live="polite">No projects in this category yet.</p>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --px: clamp(24px, 6vw, 80px);
+    --py: clamp(60px, 8vw, 96px);
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────────── */
+  .wk-hero {
+    padding: calc(64px + clamp(48px, 6vw, 80px)) var(--px) clamp(40px, 5vw, 64px);
+    border-bottom: 0.5px solid #E5E4E0;
+  }
+
+  .wk-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    margin-bottom: 24px;
+  }
+
+  .wk-headline {
+    font-size: clamp(2.75rem, 7vw, 8rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin-bottom: 20px;
+  }
+
+  .wk-sub {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: #888888;
+  }
+
+  /* ── Filters ──────────────────────────────────────────────────── */
+  .wk-filters {
+    padding: 0 var(--px);
+  }
+
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 20px 0;
+  }
+
+  .filter-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    line-height: 1;
+  }
+
+  .filter-btn:hover    { color: #333333; }
+  .filter-btn.is-active { color: #111111; }
+
+  .filter-divider {
+    height: 0.5px;
+    background: #E5E4E0;
+  }
+
+  /* ── Grid ─────────────────────────────────────────────────────── */
+  .wk-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: clamp(16px, 2vw, 32px);
+    row-gap: clamp(24px, 3vw, 36px);
+    padding: clamp(32px, 4vw, 56px) var(--px) var(--py);
+  }
+
+  .project-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-card.is-featured {
+    grid-column: 1 / -1;
+  }
+
+  /* Image */
+  .card-image {
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+
+  .card-img-inner {
+    background: #F0EFEB;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-img-inner { transition: none; }
+  }
+
+  .project-card:hover .card-img-inner {
+    transform: scale(1.02);
+  }
+
+  .img-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888888;
+  }
+
+  /* Card body */
+  .card-name {
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #111111;
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #555555;
+    margin-bottom: 16px;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #888888;
+    background: #F0EFEB;
+    padding: 6px 10px;
+  }
+
+  /* Empty state */
+  .empty-state {
+    display: none;
+    grid-column: 1 / -1;
+    font-size: 15px;
+    font-weight: 300;
+    color: #888888;
+    padding: 48px 0;
+  }
+
+  /* ── Mobile ───────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .wk-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .project-card.is-featured {
+      grid-column: auto;
+    }
+
+    .filter-row {
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  }
+</style>
+
+<script>
+  const filterBtns    = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards         = document.querySelectorAll<HTMLElement>('.project-card');
+  const emptyState    = document.querySelector<HTMLElement>('.empty-state');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'all';
+
+      filterBtns.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      let visible = 0;
+      cards.forEach(card => {
+        const cats = (card.dataset.categories ?? '').split(' ');
+        const show = filter === 'all' || cats.includes(filter);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      if (emptyState) emptyState.style.display = visible === 0 ? 'block' : 'none';
+    });
+  });
+</script>
