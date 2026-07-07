@@ -254,6 +254,7 @@ const contImg2  = (await allImages['../assets/work/stirling-education/media-22.p
     letter-spacing: -0.02em;
     color: #111111;
     margin-bottom: 24px;
+    overflow-wrap: break-word;
   }
 
   .sv-sub {
@@ -607,13 +608,7 @@ const contImg2  = (await allImages['../assets/work/stirling-education/media-22.p
     .sidebar-nav {
       flex-direction: row;
       gap: 20px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
-    .sidebar-link {
-      white-space: nowrap;
-      flex-shrink: 0;
+      flex-wrap: wrap;
     }
 
     .service-section {
