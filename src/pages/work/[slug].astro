@@ -22,11 +22,59 @@ const sorted = allEntries.sort((a, b) => a.data.order - b.data.order);
 const currentIndex = sorted.findIndex(e => e.id === entry.id);
 const nextEntry = sorted[(currentIndex + 1) % sorted.length];
 
+const allImages = import.meta.glob<{ default: ImageMetadata }>('../../assets/work/**/*.png');
+
+// Card display data — mirrors the projects array in work.astro so the card is identical
+const WORK_CARD: Record<string, { desc: string; tag: string }> = {
+  'long-close-school':            { desc: 'A heritage school rebuilt to convert.',                                    tag: 'BRAND + WEB REBUILD' },
+  'dope-jewelry-bean-up':         { desc: '3D ads built for paid social. A bean-shaped collection launched at scale.', tag: '3D + PAID ADS' },
+  'stirling-education':           { desc: 'A full communication system for a global network.',                        tag: 'BRAND + WEB + SOCIAL' },
+  'redshift-education':           { desc: 'A growing school network with a brand that scales.',                       tag: 'BRAND + WEBSITE' },
+  'advelop':                      { desc: 'Sixteen products, one shelf-clear system.',                                tag: 'PACKAGING + LABEL SYSTEM' },
+  'dope-jewelry-3d':              { desc: 'A 3D launch animation built in Blender around the Dope symbol.',          tag: '3D + MOTION' },
+  'dope-jewelry':                 { desc: 'A brand launched from zero into a live store.',                            tag: 'BRAND + SHOPIFY + 3D' },
+  'dope-jewelry-launch-campaign': { desc: 'A brand launch shot in Sarajevo with a real community.',                   tag: 'CAMPAIGN + PRODUCTION' },
+  'dope-jewelry-photography':     { desc: 'Studio work, product-first and web-ready.',                               tag: 'PRODUCT PHOTOGRAPHY' },
+  'polam-school':                 { desc: 'An identity pulled straight from inside the building.',                    tag: 'BRAND + WEBSITE' },
+  'castle-college':               { desc: 'A new institution built from the ground up.',                             tag: 'BRAND + WEBSITE' },
+  'agdal-nuhanovic':              { desc: "A portfolio that gets out of the work's way.",                             tag: 'LOGO + PORTFOLIO SITE' },
+  'bc-law-ltd':                   { desc: 'Authority without the legal clichés.',                                    tag: 'BRAND + WEBSITE' },
+};
+
+const nextSlug = nextEntry.id.replace(/\.md$/, '');
+const nextCardData = WORK_CARD[nextSlug];
+
+const nextCoverFile = nextEntry.data.cover as string | undefined;
+let nextCoverImg: ImageMetadata | undefined;
+let nextCoverVideo: string | undefined;
+if (nextCoverFile) {
+  if (nextCoverFile.endsWith('.mp4')) {
+    nextCoverVideo = nextCoverFile;
+  } else if (/\.(png|jpg|jpeg|webp)$/i.test(nextCoverFile)) {
+    const mod = await allImages[`../../assets/work/${nextSlug}/${nextCoverFile}`]?.();
+    nextCoverImg = mod?.default;
+  }
+}
+
+const next2Entry = sorted[(currentIndex + 2) % sorted.length];
+const next2Slug = next2Entry.id.replace(/\.md$/, '');
+const next2CardData = WORK_CARD[next2Slug];
+
+const next2CoverFile = next2Entry.data.cover as string | undefined;
+let next2CoverImg: ImageMetadata | undefined;
+let next2CoverVideo: string | undefined;
+if (next2CoverFile) {
+  if (next2CoverFile.endsWith('.mp4')) {
+    next2CoverVideo = next2CoverFile;
+  } else if (/\.(png|jpg|jpeg|webp)$/i.test(next2CoverFile)) {
+    const mod = await allImages[`../../assets/work/${next2Slug}/${next2CoverFile}`]?.();
+    next2CoverImg = mod?.default;
+  }
+}
+
 const testimonials = (data.testimonials && data.testimonials.length > 0)
   ? data.testimonials
   : [{ quote: 'Testimonial to be added.', name: 'Client Name', role: 'Role, Company' }];
-
-const allImages = import.meta.glob<{ default: ImageMetadata }>('../../assets/work/**/*.png');
 
 const loadImg = async (name: string): Promise<ImageMetadata | undefined> => {
   const mod = await allImages[`../../assets/work/${slug}/${name}`]?.();
@@ -40,6 +88,7 @@ type GridItem =
   | { type: 'quad'; imgA: ImageMetadata; imgB: ImageMetadata; imgC: ImageMetadata; imgD: ImageMetadata }
   | { type: 'split'; imgA: ImageMetadata; imgB: ImageMetadata; imgC: ImageMetadata }
   | { type: 'videopair'; fileA: string; fileB: string }
+  | { type: 'vidimgpair'; file: string; img: ImageMetadata }
   | { type: 'fullvideo'; file: string }
   | { type: 'reel'; file: string }
   | { type: 'video' };
@@ -74,6 +123,12 @@ const gridItems: GridItem[] = (await Promise.all(
     if (item.startsWith('videopair:')) {
       const [fileA, fileB] = item.replace('videopair:', '').split(':');
       return { type: 'videopair', fileA, fileB } as const;
+    }
+    if (item.startsWith('vidimgpair:')) {
+      const [file, imgFile] = item.replace('vidimgpair:', '').split(':');
+      const img = await loadImg(imgFile);
+      if (!img) return null;
+      return { type: 'vidimgpair', file, img } as const;
     }
     if (item.startsWith('fullvideo:')) {
       const file = item.replace('fullvideo:', '');
@@ -247,6 +302,17 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
             </div>
           </div>
         );
+        if (item.type === 'vidimgpair') return (
+          <div class="case-grid__pair">
+            <div class="video-wrap">
+              <video autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+                <source src={`/work/${slug}/${item.file}`} type="video/mp4" />
+              </video>
+              <button class="sound-btn" aria-label="Toggle sound">SOUND OFF</button>
+            </div>
+            <Image src={item.img} alt="" style="width:100%;height:auto;display:block;" />
+          </div>
+        );
         if (item.type === 'fullvideo') return (
           <div class="case-grid__full">
             <div class="video-wrap">
@@ -297,14 +363,55 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
   </section>
 
   <!-- 8. Next project -->
-  {nextEntry && nextEntry.id !== entry.id && (
-    <div class="cs-next">
-      <a href={`/work/${nextEntry.id.replace(/\.md$/, '')}`} class="next-link">
-        <span class="next-label">Next project</span>
-        <span class="next-title">{noWidow(nextEntry.data.title)}</span>
-        <span class="next-arrow">→</span>
-      </a>
-    </div>
+  {sorted.length > 1 && (
+    <section class="cs-next">
+      <p class="next-eyebrow">Next project</p>
+      <div class="next-cards">
+
+        <a href={`/work/${nextSlug}`} class="next-project-card">
+          <div class="card-image">
+            <div class="card-img-inner">
+              {nextCoverVideo ? (
+                <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+                  <source src={`/work/${nextSlug}/${nextCoverVideo}`} type="video/mp4" />
+                </video>
+              ) : nextCoverImg ? (
+                <Image src={nextCoverImg} alt={nextEntry.data.title} style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : (
+                <span class="card-img-placeholder">Project image</span>
+              )}
+            </div>
+          </div>
+          <div class="card-body">
+            <h2 class="card-name">{noWidow(nextEntry.data.title)}</h2>
+            {nextCardData?.desc && <p class="card-desc">{noWidow(nextCardData.desc)}</p>}
+            {nextCardData?.tag && <span class="card-tag">{nextCardData.tag}</span>}
+          </div>
+        </a>
+
+        <a href={`/work/${next2Slug}`} class="next-project-card">
+          <div class="card-image">
+            <div class="card-img-inner">
+              {next2CoverVideo ? (
+                <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+                  <source src={`/work/${next2Slug}/${next2CoverVideo}`} type="video/mp4" />
+                </video>
+              ) : next2CoverImg ? (
+                <Image src={next2CoverImg} alt={next2Entry.data.title} style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : (
+                <span class="card-img-placeholder">Project image</span>
+              )}
+            </div>
+          </div>
+          <div class="card-body">
+            <h2 class="card-name">{noWidow(next2Entry.data.title)}</h2>
+            {next2CardData?.desc && <p class="card-desc">{noWidow(next2CardData.desc)}</p>}
+            {next2CardData?.tag && <span class="card-tag">{next2CardData.tag}</span>}
+          </div>
+        </a>
+
+      </div>
+    </section>
   )}
 
 </Layout>
@@ -536,30 +643,85 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
     border-top: 0.5px solid #E5E4E0;
     padding: var(--py) var(--px);
   }
-  .next-link {
-    display: flex;
-    align-items: baseline;
-    gap: 24px;
-  }
-  .next-label {
+
+  .next-eyebrow {
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: #888888;
-    flex-shrink: 0;
+    margin-bottom: 32px;
   }
-  .next-title {
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    font-weight: 300;
-    color: #111111;
-    letter-spacing: -0.01em;
+
+  .next-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 2vw, 32px);
   }
-  .next-arrow {
-    font-size: 24px;
+
+  .next-project-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .next-project-card .card-image {
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+
+  .next-project-card .card-img-inner {
+    background: #F0EFEB;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .next-project-card .card-img-inner { transition: none; }
+  }
+
+  .next-project-card:hover .card-img-inner {
+    transform: scale(1.02);
+  }
+
+  .next-project-card .card-img-placeholder {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: #888888;
-    margin-left: auto;
-    flex-shrink: 0;
+  }
+
+  .next-project-card .card-name {
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #111111;
+    margin-bottom: 8px;
+  }
+
+  .next-project-card .card-desc {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #555555;
+    margin-bottom: 16px;
+  }
+
+  .next-project-card .card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #888888;
+    background: #F0EFEB;
+    padding: 6px 10px;
   }
 
   /* Mobile */
@@ -584,7 +746,9 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
       grid-template-columns: 1fr;
       gap: 40px;
     }
-    .next-link { flex-wrap: wrap; }
+    .next-cards {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 480px) {

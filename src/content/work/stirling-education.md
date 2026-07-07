@@ -10,7 +10,7 @@ order: 3
 cover: media-1.png
 gallery:
   - media-1.png
-  - media-2.png
+  - fullvideo:global-network.mp4
   - media-3.png
   - pair:media-4.png:media-5.png
   - media-6.png

@@ -202,17 +202,68 @@ const wordmarkSvg = wordmarkSvgRaw.replace(/<\?xml[^>]*\?>\s*/, '');
 
   /* Mobile */
   @media (max-width: 768px) {
+    /* Lock footer to exactly one viewport — prevents content escape on sticky reveal */
+    .site-footer {
+      max-height: 100vh;
+    }
+
+    /* Padding: generous top, modest bottom; space-between pushes legal row down */
+    .footer-inner {
+      padding: 56px 28px 28px;
+      justify-content: space-between;
+    }
+
     .footer-top {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 24px;
     }
+
     .footer-contact { align-items: flex-start; }
-    .footer-bottom {
-      grid-template-columns: 1fr;
+
+    /* Tagline: drop from clamp min 42px → 32px */
+    .site-footer .footer-headline {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    /* "Start a new project" link */
+    .site-footer .footer-cta-link {
+      font-size: 15px;
+    }
+
+    /* Nav links: tighter gap, smaller text */
+    .site-footer .footer-nav {
       gap: 12px;
     }
-    .footer-social { justify-self: start; }
-    .footer-legal { justify-self: start; }
+    .site-footer .footer-nav a {
+      font-size: 17px;
+    }
+
+    /* Contact block */
+    .site-footer .footer-contact {
+      gap: 7px;
+    }
+    .site-footer .footer-contact a {
+      font-size: 14px;
+    }
+
+    /* Bottom bar: single column, tight */
+    .footer-bottom {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding-top: 14px;
+    }
+    .footer-copyright { font-size: 12px; }
+    .footer-social {
+      justify-self: start;
+      gap: 16px;
+    }
+    .footer-social a { font-size: 12px; }
+    .footer-legal {
+      justify-self: start;
+      font-size: 12px;
+    }
+
     .footer-wordmark { display: none; }
   }
 </style>

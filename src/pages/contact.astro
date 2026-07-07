@@ -20,7 +20,7 @@ import { noWidow } from '../utils/noWidow';
 
     <!-- Headline -->
     <section class="ct-headline-section">
-      <h1 class="ct-headline">{noWidow("Good work starts with a conversation.")}</h1>
+      <h1 class="ct-headline">Good work starts<br class="mob-break" />{noWidow(" with a conversation.")}</h1>
     </section>
 
     <!-- Info -->
@@ -202,8 +202,17 @@ import { noWidow } from '../utils/noWidow';
     color: #BBBBBB;
   }
 
+  /* Hidden on desktop — only reveals on mobile to control the heading break */
+  .mob-break { display: none; }
+
   /* ── Mobile ──────────────────────────────────────────────────── */
   @media (max-width: 768px) {
+    .ct-headline {
+      font-size: clamp(2rem, 8vw, 2.5rem);
+    }
+
+    .mob-break { display: inline; }
+
     .ct-inner {
       grid-template-columns: 1fr;
       gap: 48px;
