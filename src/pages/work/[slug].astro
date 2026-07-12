@@ -31,7 +31,7 @@ const WORK_CARD: Record<string, { desc: string; tag: string }> = {
   'dope-jewelry-bean-up':         { desc: '3D ads built for paid social. A bean-shaped collection launched at scale.', tag: '3D + PAID ADS' },
   'stirling-education':           { desc: 'A full communication system for a global network.',                        tag: 'BRAND + WEB + SOCIAL' },
   'redshift-education':           { desc: 'A growing school network with a brand that scales.',                       tag: 'BRAND + WEBSITE' },
-  'advelop':                      { desc: 'Sixteen products, one shelf-clear system.',                                tag: 'PACKAGING + LABEL SYSTEM' },
+  'advelop':                      { desc: 'Eight pet care products, one clean label system.',                        tag: 'PACKAGING + LABEL SYSTEM' },
   'dope-jewelry-3d':              { desc: 'A 3D launch animation built in Blender around the Dope symbol.',          tag: '3D + MOTION' },
   'dope-jewelry':                 { desc: 'A brand launched from zero into a live store.',                            tag: 'BRAND + SHOPIFY + 3D' },
   'dope-jewelry-launch-campaign': { desc: 'A brand launch shot in Sarajevo with a real community.',                   tag: 'CAMPAIGN + PRODUCTION' },
@@ -340,7 +340,7 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
 
   <!-- 7. Testimonial -->
   {hasTestimonial && (
-    <Testimonial testimonials={data.testimonials} />
+    <Testimonial testimonials={data.testimonials!} />
   )}
 
   <!-- 8. Next project -->
