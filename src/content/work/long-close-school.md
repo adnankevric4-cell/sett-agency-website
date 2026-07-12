@@ -24,7 +24,7 @@ process: "We built from the ground up. Brand guidelines were documented for the 
 solution: "The most important work happened before any visible design. We mapped how a prospective family actually moves through the school's offering, from first impression to enquiry, and built the information architecture around that journey rather than around the school's internal departments. That decision shaped everything downstream."
 results: "The result is a platform designed to convert prospective families, not just inform them. Long Close now owns a complete brand system, documented and consistent, that works without the studio's ongoing involvement. The digital presence finally matches the standard of the school behind it."
 testimonials:
-  - quote: "Working with Sett changed how we think about our school's presence. Parents tell us the website finally feels like us."
-    name: "Sarah Mitchell"
-    role: "Head of Admissions, Long Close School"
+  - quote: "The website finally matches the standard of the school behind it. Sett understood exactly what Long Close needed, not just visually, but in how families actually move through the site."
+    name: "Client Name"
+    role: "Role, Long Close School"
 ---
