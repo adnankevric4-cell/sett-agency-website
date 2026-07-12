@@ -23,8 +23,4 @@ challenge: "Long Close School has been shaping students since 1941. The philosop
 process: "We built from the ground up. Brand guidelines were documented for the first time: a logo system, colour specifications, typography, and clear space rules. The website was rebuilt around the three school communities, each with its own dedicated section and a consistent narrative structure. Architecture, SEO, and development were treated as one process rather than separate stages, so the structure that made sense for a parent was the same structure that made sense for search."
 solution: "The most important work happened before any visible design. We mapped how a prospective family actually moves through the school's offering, from first impression to enquiry, and built the information architecture around that journey rather than around the school's internal departments. That decision shaped everything downstream."
 results: "The result is a platform designed to convert prospective families, not just inform them. Long Close now owns a complete brand system, documented and consistent, that works without the studio's ongoing involvement. The digital presence finally matches the standard of the school behind it."
-testimonials:
-  - quote: "The website finally matches the standard of the school behind it. Sett understood exactly what Long Close needed, not just visually, but in how families actually move through the site."
-    name: "Client Name"
-    role: "Role, Long Close School"
 ---

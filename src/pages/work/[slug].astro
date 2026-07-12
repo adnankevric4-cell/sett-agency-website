@@ -73,9 +73,7 @@ if (next2CoverFile) {
   }
 }
 
-const testimonials = (data.testimonials && data.testimonials.length > 0)
-  ? data.testimonials
-  : [{ quote: 'Testimonial to be added.', name: 'Client Name', role: 'Role, Company' }];
+const hasTestimonial = !!(data.testimonials && data.testimonials.length > 0);
 
 const loadImg = async (name: string): Promise<ImageMetadata | undefined> => {
   const mod = await allImages[`../../assets/work/${slug}/${name}`]?.();
@@ -341,7 +339,9 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
   )}
 
   <!-- 7. Testimonial -->
-  <Testimonial testimonials={testimonials} />
+  {hasTestimonial && (
+    <Testimonial testimonials={data.testimonials} />
+  )}
 
   <!-- 8. Next project -->
   {sorted.length > 1 && (
