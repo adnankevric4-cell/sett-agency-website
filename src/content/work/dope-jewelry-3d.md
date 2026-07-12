@@ -20,4 +20,8 @@ challenge: "Dope needed a launch moment. A new brand entering a crowded space ne
 process: "The animation was built in Blender, centred entirely on the Dope symbol. The concept came directly from the product: the symbol begins fully gold, referencing the gold-plated pieces at the core of the first collection. The surface then fractures and peels away, revealing the clean white form beneath, a reference to the silver pieces in the range."
 solution: "Every frame was rendered to work both as a still and as part of the sequence. The close-up shots of the fracturing gold surface were designed to hold as standalone images for social content, not just transitional frames in a video."
 results: "Product material and brand identity communicated in a single motion. The animation launched the brand without text, without explanation. The symbol did the work."
+testimonials:
+  - quote: "Working with Sett has been one of the best creative partnerships I've had. They understand a brand beyond the brief and turn ideas into thoughtful, well-executed solutions, reliable, detail-oriented and genuinely invested in the outcome. They don't just deliver what you ask for, they think with you and make the final result stronger. I would recommend Sett to anyone looking for a creative partner they can truly trust."
+    name: "Sara Vlatković"
+    role: "CEO, Dope Jewelry"
 ---
