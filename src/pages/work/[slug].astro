@@ -27,6 +27,7 @@ const allImages = import.meta.glob<{ default: ImageMetadata }>('../../assets/wor
 
 // Card display data — mirrors the projects array in work.astro so the card is identical
 const WORK_CARD: Record<string, { desc: string; tag: string }> = {
+  'laleon-exclusive':             { desc: 'A fine jewelry e-commerce store built for launch.',                      tag: 'WOOCOMMERCE + E-COMMERCE' },
   'long-close-school':            { desc: 'A heritage school rebuilt to convert.',                                    tag: 'BRAND + WEB REBUILD' },
   'dope-jewelry-bean-up':         { desc: '3D ads built for paid social. A bean-shaped collection launched at scale.', tag: '3D + PAID ADS' },
   'stirling-education':           { desc: 'A full communication system for a global network.',                        tag: 'BRAND + WEB + SOCIAL' },

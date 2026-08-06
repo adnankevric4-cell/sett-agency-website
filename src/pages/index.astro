@@ -8,7 +8,7 @@ import foundersImg from '../assets/brand/Team/varvara-adnan-founders.jpg';
 
 const allImages = import.meta.glob<{ default: ImageMetadata }>('../assets/work/**/*.png');
 const workEntries = await getCollection('work');
-const svcSlugs = ['stirling-education', 'long-close-school', 'dope-jewelry-launch-campaign', 'dope-jewelry-bean-up'];
+const svcSlugs = ['stirling-education', 'laleon-exclusive', 'dope-jewelry-launch-campaign', 'dope-jewelry-bean-up'];
 const svcCover: Record<string, ImageMetadata | undefined> = {};
 const svcVideo: Record<string, string> = {};
 for (const entry of workEntries) {
@@ -19,8 +19,6 @@ for (const entry of workEntries) {
   if (f.endsWith('.mp4')) { svcVideo[slug] = f; }
   else { const mod = await allImages[`../assets/work/${slug}/${f}`]?.(); svcCover[slug] = mod?.default; }
 }
-// Web card uses a specific image, not the project's default cover
-svcCover['long-close-school'] = (await allImages['../assets/work/long-close-school/media-9.png']?.())?.default;
 
 const quoteText = "We're driven by the desire to make things that last. Not just visually, but strategically. Work that holds up over time, that grows with the client, that means something beyond the brief.";
 const quoteWords = quoteText.split(' ');
@@ -120,17 +118,17 @@ const clientLogos = Object.values(logoModules);
           <p class="sv-lead">{noWidow("A website that performs is designed around what your audience needs to do.")}</p>
           <div class="sv-project">
             <div class="sv-proj-img">
-              {svcCover['long-close-school'] ? (
-                <Image src={svcCover['long-close-school']!} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              {svcCover['laleon-exclusive'] ? (
+                <Image src={svcCover['laleon-exclusive']!} alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
               ) : (
                 <span class="sv-proj-img-label">Project image</span>
               )}
             </div>
             <div class="sv-proj-info">
-              <h3 class="sv-proj-name">{noWidow("Long Close School")}</h3>
-              <p class="sv-proj-desc">{noWidow("A heritage school rebuilt to convert.")}</p>
-              <span class="sv-proj-tag">Web + Brand</span>
-              <a href="/work/long-close-school" class="sv-cs-link">
+              <h3 class="sv-proj-name">{noWidow("Laleon Exclusive")}</h3>
+              <p class="sv-proj-desc">{noWidow("A fine jewelry e-commerce store built for launch.")}</p>
+              <span class="sv-proj-tag">WooCommerce + E-commerce</span>
+              <a href="/work/laleon-exclusive" class="sv-cs-link">
                 <span class="sv-cs-text">View case study</span>
                 <span class="sv-cs-arrow">→</span>
               </a>
