@@ -1,0 +1,520 @@
+---
+import { Picture } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { noWidow } from '../utils/noWidow';
+
+import kamin from '../assets/work/old-town-visoko/kamin.jpg';
+import oparusa from '../assets/work/old-town-visoko/oparusa.jpg';
+import kruska from '../assets/work/old-town-visoko/kruska.jpg';
+import sala from '../assets/work/old-town-visoko/sala.jpg';
+import kafa from '../assets/work/old-town-visoko/kafa.jpg';
+import zid from '../assets/work/old-town-visoko/zid.jpg';
+import dronRestoran from '../assets/work/old-town-visoko/dron-restoran.jpg';
+import instagramProfil from '../assets/work/old-town-visoko/instagram-profil.png';
+
+// Placeholderi: zamijeni kad stignu pravi podaci
+const WHATSAPP_NUMBER = '38763031859';
+const PHONE_NUMBER = '+38763031859';
+const showTestimonial = false;
+
+
+const WA_TEXT = 'Zdravo, vidio sam Old Town projekat i zanima me razgovor.';
+const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_TEXT)}`;
+
+const V = '/work/old-town-visoko';
+const fullSizes = '(max-width: 768px) 100vw, 1280px';
+const halfSizes = '(max-width: 768px) 50vw, 640px';
+---
+
+<Layout
+  title="Old Town Visoko: šta smo uradili za jedan restoran | Sett"
+  description="Sve što smo uradili za restoran Old Town u Visokom za dva mjeseca: brend, snimanje, meni, sajt, Google mape i Instagram."
+  lang="bs"
+  noindex
+  ogImage={`${V}/og-image-1200x628.jpg`}
+>
+
+  <!-- 1. Hero -->
+  <section class="r-hero">
+    <p class="r-services">Brend · Art direkcija · Foto i video · Print · Web dizajn · WordPress · Društvene mreže</p>
+    <h1 class="r-title">Old Town Visoko</h1>
+    <p class="r-prepared" id="preparedFor" hidden>Pripremljeno za: <span id="preparedName"></span></p>
+  </section>
+
+  <section class="r-intro">
+    <div class="r-summary">
+      <p>{noWidow('Old Town od 2005. dočekuje goste ispod srednjovjekovnog Starog grada Visoki. Za dva mjeseca smo mu napravili novi brend, snimili hranu i prostor, napravili meni i sajt, i sredili Instagram i Google mape. Ovdje je sve na jednom mjestu, zajedno s onim što se desilo poslije.')}</p>
+    </div>
+    <div class="r-meta">
+      <div class="meta-row"><span class="meta-label">Djelatnost</span><span class="meta-value">Ugostiteljstvo, restoran i bungalovi</span></div>
+      <div class="meta-row"><span class="meta-label">Lokacija</span><span class="meta-value">Visoko, Bosna i Hercegovina</span></div>
+      <div class="meta-row"><span class="meta-label">Godina</span><span class="meta-value">2026</span></div>
+      <div class="meta-row"><span class="meta-label">Web</span><span class="meta-value"><a href="https://oldtownvisoko.ba" target="_blank" rel="noopener noreferrer">oldtownvisoko.ba</a></span></div>
+    </div>
+  </section>
+
+  <div class="r-hero-video">
+    <div class="vwrap r16x9">
+      <video class="r-video" muted loop playsinline preload="metadata" poster={`${V}/Old-Town-brend-video-poster.jpg`}>
+        <source src={`${V}/Old-Town-brend-video.mp4`} type="video/mp4" />
+      </video>
+      <button class="r-sound" type="button" aria-pressed="false">Uključi zvuk</button>
+      <button class="r-play" type="button" aria-label="Pusti video" hidden>▶</button>
+    </div>
+  </div>
+
+  <!-- 5. Šta se desilo poslije -->
+  <section class="r-section r-dark">
+    <p class="r-eyebrow">Šta se desilo poslije</p>
+    <p class="r-lead">Prvih 14 dana na Instagramu, bez plaćenih reklama.</p>
+    <div class="r-stats">
+      <div class="r-stat"><strong>114.000</strong><span>pregleda</span></div>
+      <div class="r-stat"><strong>61.000</strong><span>ljudi koje je sadržaj dosegao</span></div>
+      <div class="r-stat"><strong>75%</strong><span>od njih ranije nije pratilo Old Town</span></div>
+      <div class="r-stat"><strong>+230</strong><span>novih pratilaca za 15 dana</span></div>
+    </div>
+    <div class="r-reel-split">
+      <div class="vwrap r9x16 r-reel-main">
+        <video class="r-video" muted loop playsinline preload="metadata" poster={`${V}/reel-oparusa-poster.jpg`}>
+          <source src={`${V}/reel-oparusa.mp4`} type="video/mp4" />
+        </video>
+        <button class="r-sound r-sound--top" type="button" aria-pressed="false">Uključi zvuk</button>
+        <button class="r-play" type="button" aria-label="Pusti video" hidden>▶</button>
+      </div>
+      <div>
+        <p class="r-eyebrow">Jedan reel</p>
+        <h2 class="r-h2">{noWidow('Oparuša, od tijesta do stola.')}</h2>
+        <p class="r-body">{noWidow('Najviše su ljudi gledali jedan obični video iz kuhinje. Nema glume ni teksta, samo kako se pravi jelo koje ih čeka kad dođu.')}</p>
+        <div class="r-mini-stats">
+          <div><strong>65.000</strong><span>pregleda</span></div>
+          <div><strong>641</strong><span>sačuvanja</span></div>
+          <div><strong>393</strong><span>dijeljenja</span></div>
+        </div>
+        <a class="r-link" href="https://settagency.com/work/old-town-visoko/">Cijeli projekat na engleskom →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Odakle smo krenuli -->
+  <section class="r-section">
+    <div class="r-split">
+      <div>
+        <p class="r-eyebrow">Odakle smo krenuli</p>
+        <h2 class="r-h2">{noWidow('Dobra hrana, dobro mjesto. Ali malo ko je to znao.')}</h2>
+      </div>
+      <div class="r-text">
+        <p>{noWidow('Old Town je porodični restoran ispod Starog grada Visoki, otvoren 2005. Hrana je domaća, pogled na Visočicu je tu, a postoje i bungalovi i sala za proslave.')}</p>
+        <p>{noWidow('Problem je bio u tome što su ga ljudi uglavnom vidjeli kao mjesto za turiste. Hamdo je želio da dolaze i ljudi iz Visokog, Sarajeva i Zenice, i da se kod njih prave proslave. Za to je trebalo da restoran izgleda onako kako se u njemu zaista osjećate.')}</p>
+      </div>
+    </div>
+    <div class="r-facts">
+      <div class="r-fact"><strong>Restoran od 2005.</strong><span>Porodično domaćinstvo pod Starim gradom</span></div>
+      <div class="r-fact"><strong>Cilj</strong><span>Lokalni gosti, ne samo turisti</span></div>
+      <div class="r-fact"><strong>Vrijeme</strong><span>Dva mjeseca, od brenda do Instagrama</span></div>
+    </div>
+  </section>
+
+  <!-- 3. Šta smo uradili -->
+  <section class="r-section r-dark" id="projekat">
+    <div class="r-split">
+      <div>
+        <p class="r-eyebrow">Šta smo uradili</p>
+        <h2 class="r-h2">{noWidow('Sve što gost vidi prije nego što uđe na vrata.')}</h2>
+      </div>
+      <div class="r-text">
+        <p>{noWidow('Nismo mijenjali restoran. Samo smo pokazali ono što već ima, na jednom mjestu i u istom stilu.')}</p>
+      </div>
+    </div>
+    <div class="r-cards">
+      <div class="r-card"><h3>Brend</h3><p>{noWidow('Oblik logoa nastao je iz bunara na Starom gradu, a boje i ornamenti iz simbola sa stećaka.')}</p></div>
+      <div class="r-card"><h3>Snimanje</h3><p>{noWidow('Hrana, prostor i ljudi. Fotografije, reelovi i snimci dronom iznad Visočice.')}</p></div>
+      <div class="r-card"><h3>Meni</h3><p>{noWidow('Novi meni na bosanskom i engleskom, za stol i za telefon.')}</p></div>
+      <div class="r-card"><h3>Sajt</h3><p>{noWidow('Restoran, bungalovi, proslave i meni, sve na oldtownvisoko.ba.')}</p></div>
+      <div class="r-card"><h3>Google mape</h3><p>{noWidow('Nove slike i tačni podaci, tamo gdje ljudi prvo traže gdje će jesti.')}</p></div>
+      <div class="r-card"><h3>Instagram i Facebook</h3><p>{noWidow('Novi profil, highlights i plan objava za prve sedmice.')}</p></div>
+    </div>
+    <p class="r-note">Sve to je ispod, onako kako je danas na sajtu, Instagramu i u restoranu ↓</p>
+  </section>
+
+  <!-- 4. Materijal -->
+  <section class="r-section">
+    <p class="r-eyebrow">Materijal</p>
+    <h2 class="r-h2 r-h2--gap">{noWidow('Šta smo snimili i napravili.')}</h2>
+
+    <div class="r-gallery">
+      <div class="g-pair g-pair--stack">
+        <figure>
+          <div class="vwrap r16x9">
+            <video class="r-video" muted loop playsinline preload="metadata" poster={`${V}/Old-Town-meni-listanje-16x9-poster.jpg`}>
+              <source src={`${V}/Old-Town-meni-listanje-16x9.mp4`} type="video/mp4" />
+            </video>
+            <button class="r-sound" type="button" aria-pressed="false">Uključi zvuk</button>
+            <button class="r-play" type="button" aria-label="Pusti video" hidden>▶</button>
+          </div>
+          <figcaption><strong>Meni</strong> Novi meni, na bosanskom i engleskom.</figcaption>
+        </figure>
+        <figure>
+          <div class="vwrap r16x9">
+            <video class="r-video" muted loop playsinline preload="metadata" poster={`${V}/Old-Town-novi-sajt-16x9-poster.jpg`}>
+              <source src={`${V}/Old-Town-novi-sajt-16x9.mp4`} type="video/mp4" />
+            </video>
+            <button class="r-sound" type="button" aria-pressed="false">Uključi zvuk</button>
+            <button class="r-play" type="button" aria-label="Pusti video" hidden>▶</button>
+          </div>
+          <figcaption><strong>Novi sajt</strong> oldtownvisoko.ba</figcaption>
+        </figure>
+      </div>
+
+      <figure>
+        <div class="vwrap r16x9">
+          <video class="r-video" muted loop playsinline preload="metadata" poster={`${V}/Old-Town-web-desktop-16x9-poster.jpg`}>
+            <source src={`${V}/Old-Town-web-desktop-16x9.mp4`} type="video/mp4" />
+          </video>
+          <button class="r-play" type="button" aria-label="Pusti video" hidden>▶</button>
+        </div>
+        <figcaption><strong>Sajt na računaru</strong> {noWidow('Restoran, bungalovi, proslave i meni na jednom mjestu.')}</figcaption>
+      </figure>
+
+      <div class="g-band">
+        <div class="g-band-row">
+          <figure class="g-band-item">
+            <div class="vwrap r9x16">
+              <video class="r-video" muted loop playsinline preload="metadata" poster={`${V}/reel-dron-poster.jpg`}>
+                <source src={`${V}/reel-dron.mp4`} type="video/mp4" />
+              </video>
+              <button class="r-sound r-sound--top" type="button" aria-pressed="false">Uključi zvuk</button>
+              <button class="r-play" type="button" aria-label="Pusti video" hidden>▶</button>
+            </div>
+            <figcaption><strong>Reel</strong> Dron iznad Visočice</figcaption>
+          </figure>
+          <figure class="g-band-item">
+            <div class="r9x16 g-img">
+              <Picture src={instagramProfil} formats={['webp']} fallbackFormat="png" widths={[600, 1000]} sizes="(max-width: 768px) 70vw, 400px" alt="Instagram profil Old Town Visoko" loading="lazy" />
+            </div>
+            <figcaption><strong>Instagram</strong> Novi profil i highlights</figcaption>
+          </figure>
+          <figure class="g-band-item">
+            <div class="vwrap r9x16">
+              <video class="r-video" muted loop playsinline preload="metadata" poster={`${V}/reel-kamin-poster.jpg`}>
+                <source src={`${V}/reel-kamin.mp4`} type="video/mp4" />
+              </video>
+              <button class="r-sound r-sound--top" type="button" aria-pressed="false">Uključi zvuk</button>
+              <button class="r-play" type="button" aria-label="Pusti video" hidden>▶</button>
+            </div>
+            <figcaption><strong>Reel</strong> Uz kamin</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="r16x9 g-img"><Picture src={kamin} formats={['webp']} fallbackFormat="jpg" widths={[800, 1600, 2400]} sizes={fullSizes} alt="Kamin u restoranu Old Town" loading="lazy" /></div>
+      <div class="g-pair">
+        <div class="r1x1 g-img"><Picture src={oparusa} formats={['webp']} fallbackFormat="jpg" widths={[600, 1200]} sizes={halfSizes} alt="Oparuša" loading="lazy" /></div>
+        <div class="r1x1 g-img"><Picture src={kruska} formats={['webp']} fallbackFormat="jpg" widths={[600, 1200]} sizes={halfSizes} alt="Kruška" loading="lazy" /></div>
+      </div>
+      <div class="r16x9 g-img"><Picture src={sala} formats={['webp']} fallbackFormat="jpg" widths={[800, 1600, 2400]} sizes={fullSizes} alt="Sala za proslave" loading="lazy" /></div>
+      <div class="g-pair">
+        <div class="r1x1 g-img"><Picture src={kafa} formats={['webp']} fallbackFormat="jpg" widths={[600, 1200]} sizes={halfSizes} alt="Kafa u džezvi" loading="lazy" /></div>
+        <div class="r1x1 g-img"><Picture src={zid} formats={['webp']} fallbackFormat="jpg" widths={[600, 1200]} sizes={halfSizes} alt="Detalj iz restorana" loading="lazy" /></div>
+      </div>
+      <div class="r16x9 g-img"><Picture src={dronRestoran} formats={['webp']} fallbackFormat="jpg" widths={[800, 1600, 2400]} sizes={fullSizes} alt="Restoran Old Town iz zraka" loading="lazy" /></div>
+
+      <figure>
+        <div class="vwrap r16x9">
+          <video class="r-video" muted loop playsinline preload="metadata" poster={`${V}/Old-Town-dron-bunar-logo-poster.jpg`}>
+            <source src={`${V}/Old-Town-dron-bunar-logo.mp4`} type="video/mp4" />
+          </video>
+          <button class="r-sound" type="button" aria-pressed="false">Uključi zvuk</button>
+          <button class="r-play" type="button" aria-label="Pusti video" hidden>▶</button>
+        </div>
+        <figcaption><strong>Odakle logo</strong> {noWidow('Bunar na Starom gradu, snimljen dronom, iz kojeg je nastao oblik logoa.')}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 6. Riječ vlasnika (sakriveno dok tekst nije odobren) -->
+  {showTestimonial && (
+    <section class="r-section r-beige">
+      <blockquote class="r-quote">„Znali smo da imamo dobru hranu, ali nismo znali kako to pokazati. Sad nam ljudi dolaze i kažu da su nas vidjeli na Instagramu.“</blockquote>
+      <div class="r-quote-person">
+        <span class="r-quote-logo"><img src={`${V}/old-town-logo-badge-white.svg`} alt="" width="36" height="36" /></span>
+        <div><strong>Hamdo [prezime]</strong><span>Vlasnik, Old Town Visoko</span></div>
+      </div>
+    </section>
+  )}
+
+  <!-- 7. Ako imate restoran -->
+  <section class="r-section">
+    <p class="r-eyebrow">Ako imate restoran</p>
+    <h2 class="r-h2">Ne mora sve odjednom.</h2>
+    <p class="r-body r-body--wide">{noWidow('Old Town je dobio sve, ali to nije pravilo. Nekom restoranu trebaju samo dobre slike, nekom meni i sajt, a nekom cijeli novi izgled. Prvo pogledamo šta imate, pa onda pričamo šta ima smisla.')}</p>
+    <div class="r-tiers">
+      <div class="r-tier">
+        <h3>Snimanje i mreže</h3>
+        <p>{noWidow('Ako imate izgled koji vam odgovara, a fali vam sadržaj.')}</p>
+        <ul><li>Fotografije hrane i prostora</li><li>Reelovi</li><li>Sređen Instagram i Google mape</li></ul>
+      </div>
+      <div class="r-tier">
+        <h3>Meni i sajt</h3>
+        <p>{noWidow('Da vas ljudi lako nađu i odmah vide šta nudite.')}</p>
+        <ul><li>Novi meni, print i digitalno</li><li>Sajt s menijem i kontaktom</li><li>Plan objava</li></ul>
+      </div>
+      <div class="r-tier">
+        <h3>Novi brend</h3>
+        <p>{noWidow('Kompletan novi izgled, kao kod Old Towna.')}</p>
+        <ul><li>Logo, boje i ornamenti</li><li>Sve iz prethodna dva</li><li>Snimanje dronom</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Pitanja -->
+  <section class="r-section r-faq-section">
+    <p class="r-eyebrow">Pitanja</p>
+    <h2 class="r-h2 r-h2--gap">{noWidow('Ono što nas najčešće pitaju.')}</h2>
+    <div class="r-faq">
+      <details open><summary>Koliko to košta?<span aria-hidden="true">+</span></summary><p>{noWidow('Zavisi šta vam treba. Kad vidimo vaš restoran i dogovorimo se šta radimo, šaljemo ponudu s tačnom cijenom.')}</p></details>
+      <details><summary>Koliko traje?<span aria-hidden="true">+</span></summary><p>{noWidow('Za Old Town je sve trajalo dva mjeseca. Manji posao, kao snimanje i Instagram, po dogovoru.')}</p></details>
+      <details><summary>Moramo li zatvoriti restoran za snimanje?<span aria-hidden="true">+</span></summary><p>{noWidow('Ne. Snimamo kad vama odgovara, najčešće prije otvaranja ili u mirnijem dijelu dana.')}</p></details>
+      <details><summary>Radite li izvan Visokog?<span aria-hidden="true">+</span></summary><p>Da, po cijeloj Bosni i Hercegovini.</p></details>
+      <details><summary>Ko vodi Instagram poslije?<span aria-hidden="true">+</span></summary><p>{noWidow('Možete sami, po planu koji vam napravimo, ili to možemo preuzeti mi.')}</p></details>
+    </div>
+  </section>
+
+  <!-- 9. Kontakt -->
+  <section class="r-section r-black" id="kontakt">
+    <p class="r-eyebrow">Kontakt</p>
+    <h2 class="r-h2">{noWidow('Ako vam je ovo zanimljivo, javite se.')}</h2>
+    <p class="r-body">{noWidow('Rado ćemo popričati pola sata o vašem restoranu. Pogledamo šta imate i kažemo vam iskreno šta bismo prvo uradili. Bez obaveze, i ako na kraju ne radimo zajedno.')}</p>
+    <div class="r-buttons">
+      <a class="r-btn r-btn--solid" id="waBtn" href={waHref} data-number={WHATSAPP_NUMBER} data-text={WA_TEXT} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="r-btn" href={`tel:${PHONE_NUMBER}`}>Pozovite nas</a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .r-hero, .r-intro, .r-hero-video, .r-section {
+    --px: clamp(24px, 6vw, 80px);
+    --py: clamp(64px, 9vw, 120px);
+  }
+  .r-hero { padding: calc(24px + 18px + 56px) var(--px) clamp(32px, 4vw, 48px); }
+  .r-services { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; margin-bottom: 24px; }
+  .r-title { font-size: clamp(2.75rem, 7vw, 8rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; color: #111111; max-width: 16ch; }
+  .r-prepared { margin-top: 20px; font-size: 15px; font-weight: 400; color: #555555; }
+  .r-prepared span { color: #111111; font-weight: 600; }
+
+  .r-intro { display: grid; grid-template-columns: 1fr 300px; gap: 80px; padding: clamp(32px, 4vw, 48px) var(--px) clamp(40px, 5vw, 64px); border-top: 0.5px solid #BBBBBB; }
+  .r-summary p { font-size: 20px; font-weight: 300; line-height: 1.6; color: #333333; }
+  .meta-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 0.5px solid #E5E4E0; }
+  .meta-row:first-child { border-top: 0.5px solid #E5E4E0; }
+  .meta-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; flex-shrink: 0; }
+  .meta-value { font-size: 14px; font-weight: 500; color: #111111; text-align: right; }
+  .meta-value a { color: #111111; }
+
+  .r-hero-video { padding: 0 var(--px) var(--py); }
+
+  /* Media */
+  .vwrap { position: relative; overflow: hidden; border-radius: 20px; background: #E5E4E0; }
+  .r16x9 { aspect-ratio: 16 / 9; }
+  .r9x16 { aspect-ratio: 9 / 16; }
+  .r1x1 { aspect-ratio: 1 / 1; }
+  .vwrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .g-img { overflow: hidden; border-radius: 20px; background: #E5E4E0; }
+  .g-img :global(picture), .g-img :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .r-sound {
+    position: absolute; right: 14px; bottom: 14px;
+    background: rgba(17, 17, 17, 0.6); color: #F7F6F2;
+    border: none; border-radius: 999px; padding: 8px 14px;
+    font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 500;
+    cursor: pointer; backdrop-filter: blur(6px);
+  }
+  .r-sound--top { top: 14px; bottom: auto; }
+  .r-sound:hover { background: rgba(17, 17, 17, 0.85); }
+  .r-play {
+    position: absolute; inset: 0; margin: auto; width: 64px; height: 64px;
+    border-radius: 50%; border: none; background: rgba(17, 17, 17, 0.6); color: #F7F6F2;
+    font-size: 20px; cursor: pointer;
+  }
+  figure { margin: 0; }
+  figcaption { margin-top: 12px; font-size: 14px; font-weight: 300; color: #555555; }
+  figcaption strong { font-weight: 600; color: #111111; margin-right: 6px; }
+
+  /* Sections */
+  .r-section { padding: var(--py) var(--px); }
+  .r-dark { background: #3B2A20; color: #F4EDE2; }
+  .r-beige { background: #EFE7DA; }
+  .r-black { background: #111111; color: #F7F6F2; }
+  .r-dark :is(h2, h3, p, strong), .r-black :is(h2, h3, p, strong) { color: inherit; }
+  .r-dark .r-lead, .r-dark .r-body, .r-dark .r-text p { color: rgba(244, 237, 226, 0.85); }
+  .r-black .r-body { color: rgba(247, 246, 242, 0.8); }
+  .r-eyebrow { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: #888888; margin-bottom: 20px; }
+  .r-dark .r-eyebrow { color: #E39A7C; }
+  .r-black .r-eyebrow { color: #888888; }
+  .r-h2 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 400; line-height: 1.12; letter-spacing: -0.015em; max-width: 20ch; }
+  .r-h2--gap { margin-bottom: clamp(32px, 4vw, 56px); }
+  .r-split { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .r-text p, .r-body { font-size: 18px; font-weight: 300; line-height: 1.7; }
+  .r-text p + p { margin-top: 18px; }
+  .r-text { padding-top: 34px; }
+  .r-body { margin-top: 20px; max-width: 56ch; }
+  .r-body--wide { max-width: 68ch; }
+
+  .r-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: clamp(48px, 6vw, 80px); }
+  .r-fact { border-top: 0.5px solid #BBBBBB; padding-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .r-fact strong { font-size: 16px; font-weight: 600; }
+  .r-fact span { font-size: 15px; font-weight: 300; color: #555555; }
+
+  .r-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: clamp(40px, 5vw, 64px); }
+  .r-card { background: #4A3628; border-radius: 16px; padding: 28px; }
+  .r-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+  .r-card p { font-size: 15px; font-weight: 300; line-height: 1.6; color: rgba(244, 237, 226, 0.85); }
+  .r-note { margin-top: 32px; font-size: 15px; font-weight: 300; color: rgba(244, 237, 226, 0.75); }
+
+  .r-gallery { display: flex; flex-direction: column; gap: 24px; }
+  .g-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .g-band { background: #EFE7DA; padding: 56px; border-radius: 24px; }
+  .g-band-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+
+  .r-lead { font-size: 20px; font-weight: 300; margin-bottom: clamp(32px, 4vw, 56px); }
+  .r-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .r-stat { border-top: 0.5px solid rgba(244, 237, 226, 0.3); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .r-stat strong { font-size: clamp(2.25rem, 4.5vw, 4rem); font-weight: 700; line-height: 1; }
+  .r-stat span { font-size: 15px; font-weight: 300; color: rgba(244, 237, 226, 0.8); }
+  .r-reel-split { display: grid; grid-template-columns: 380px 1fr; gap: clamp(40px, 6vw, 96px); align-items: center; margin-top: clamp(56px, 7vw, 96px); }
+  .r-reel-main { width: 380px; }
+  .r-mini-stats { display: flex; gap: 40px; margin-top: 32px; }
+  .r-mini-stats div { display: flex; flex-direction: column; gap: 4px; }
+  .r-mini-stats strong { font-size: 28px; font-weight: 700; }
+  .r-mini-stats span { font-size: 14px; font-weight: 300; color: rgba(244, 237, 226, 0.8); }
+  .r-link { display: inline-block; margin-top: 32px; color: #F4EDE2; font-size: 15px; font-weight: 500; text-underline-offset: 4px; }
+
+  .r-quote { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 600; line-height: 1.3; max-width: 30ch; color: #111111; }
+  .r-quote-person { display: flex; align-items: center; gap: 16px; margin-top: 32px; }
+  .r-quote-logo { width: 60px; height: 60px; border-radius: 50%; background: #3B2A20; display: grid; place-items: center; }
+  .r-quote-person strong { display: block; font-weight: 600; }
+  .r-quote-person span { font-size: 14px; color: #555555; }
+
+  .r-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: clamp(40px, 5vw, 64px); }
+  .r-tier { border-top: 2px solid #111111; padding-top: 20px; }
+  .r-tier h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+  .r-tier p { font-size: 15px; font-weight: 300; line-height: 1.6; color: #555555; }
+  .r-tier ul { list-style: none; padding: 0; margin: 20px 0 0; }
+  .r-tier li { font-size: 15px; padding: 10px 0; border-bottom: 0.5px solid #E5E4E0; }
+
+  .r-faq-section { padding-top: 0; }
+  .r-faq details { border-top: 0.5px solid #E5E4E0; }
+  .r-faq details:last-child { border-bottom: 0.5px solid #E5E4E0; }
+  .r-faq summary { list-style: none; display: flex; justify-content: space-between; gap: 24px; padding: 22px 0; font-size: 19px; font-weight: 500; cursor: pointer; }
+  .r-faq summary::-webkit-details-marker { display: none; }
+  .r-faq summary span { font-weight: 300; transition: transform 0.25s ease; }
+  .r-faq details[open] summary span { transform: rotate(45deg); }
+  .r-faq summary:focus-visible { outline: 2px solid #111111; outline-offset: 4px; }
+  .r-faq details p { font-size: 17px; font-weight: 300; line-height: 1.7; color: #333333; padding-bottom: 24px; max-width: 70ch; }
+  .r-ph { background: #FFE58A; padding: 0 4px; }
+
+  .r-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+  .r-btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 26px; border: 1px solid rgba(247, 246, 242, 0.5); border-radius: 999px; color: #F7F6F2; text-decoration: none; font-size: 15px; font-weight: 500; }
+  .r-btn:hover { border-color: #F7F6F2; }
+  .r-btn--solid { background: #F7F6F2; color: #111111; border-color: #F7F6F2; }
+  .r-missing { margin-top: 20px; display: inline-block; background: #FFE58A; color: #111111; padding: 6px 10px; font-size: 13px; }
+
+  @media (max-width: 768px) {
+    .r-intro, .r-split, .r-facts, .r-cards, .r-stats, .r-tiers, .r-reel-split, .g-pair--stack { grid-template-columns: 1fr; }
+    .r-intro { gap: 40px; }
+    .r-text { padding-top: 0; }
+    .r-title { font-size: 44px; }
+    .r-h2 { font-size: 34px; }
+    .r-stats { grid-template-columns: 1fr 1fr; }
+    .g-band { padding: 32px 0; }
+    .g-band-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 24px; gap: 16px; }
+    .g-band-item { flex: 0 0 70%; scroll-snap-align: center; }
+    .r-reel-main { width: 100%; max-width: 380px; }
+    .r-mini-stats { gap: 24px; }
+    .r-buttons { flex-direction: column; }
+    .r-btn { width: 100%; }
+  }
+</style>
+
+<script>
+  // Personalizacija ?r=
+  const params = new URLSearchParams(window.location.search);
+  const rawName = (params.get('r') ?? '').trim().slice(0, 60);
+  if (rawName) {
+    const line = document.getElementById('preparedFor');
+    const nameEl = document.getElementById('preparedName');
+    if (line && nameEl) { nameEl.textContent = rawName; line.hidden = false; }
+    const wa = document.getElementById('waBtn') as HTMLAnchorElement | null;
+    if (wa) {
+      const text = `${wa.dataset.text} Restoran: ${rawName}`;
+      wa.href = `https://wa.me/${wa.dataset.number}?text=${encodeURIComponent(text)}`;
+    }
+  }
+
+  // Header: Contact skrola na kontakt sekciju
+  document.querySelectorAll<HTMLAnchorElement>('.nav-link[href="/contact"]').forEach((link) => {
+    link.href = '#kontakt';
+    const label = link.querySelector('.link-text');
+    if (label) label.textContent = 'Kontakt';
+    link.addEventListener('click', (e) => {
+      const target = document.getElementById('kontakt');
+      if (!target) return;
+      e.preventDefault();
+      setTimeout(() => {
+        const lenis = (window as any).__lenis;
+        if (lenis) lenis.scrollTo(target); else target.scrollIntoView({ behavior: 'smooth' });
+      }, 350);
+    });
+  });
+
+  // Video
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const videos = Array.from(document.querySelectorAll<HTMLVideoElement>('.r-video'));
+  const soundButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.r-sound'));
+  const userStarted = new WeakSet<HTMLVideoElement>();
+
+  const setSoundLabel = (btn: HTMLButtonElement, muted: boolean) => {
+    btn.textContent = muted ? 'Uključi zvuk' : 'Isključi zvuk';
+    btn.setAttribute('aria-pressed', muted ? 'false' : 'true');
+  };
+
+  soundButtons.forEach((btn) => {
+    const video = btn.parentElement?.querySelector('video') as HTMLVideoElement | null;
+    if (!video) return;
+    btn.addEventListener('click', () => {
+      const unmute = video.muted;
+      if (unmute) {
+        soundButtons.forEach((other) => {
+          const v = other.parentElement?.querySelector('video') as HTMLVideoElement | null;
+          if (v && v !== video) { v.muted = true; setSoundLabel(other, true); }
+        });
+        if (video.paused) { video.play().catch(() => {}); userStarted.add(video); }
+      }
+      video.muted = !unmute;
+      setSoundLabel(btn, video.muted);
+    });
+  });
+
+  videos.forEach((video) => {
+    const playBtn = video.parentElement?.querySelector('.r-play') as HTMLButtonElement | null;
+    if (reduceMotion && playBtn) {
+      playBtn.hidden = false;
+      playBtn.addEventListener('click', () => {
+        userStarted.add(video);
+        video.play().catch(() => {});
+        playBtn.hidden = true;
+      });
+    }
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const video = entry.target as HTMLVideoElement;
+      if (entry.isIntersecting) {
+        if (!reduceMotion || userStarted.has(video)) video.play().catch(() => {});
+      } else if (!video.paused) {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+  videos.forEach((v) => io.observe(v));
+</script>

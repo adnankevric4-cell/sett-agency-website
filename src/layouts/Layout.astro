@@ -11,13 +11,17 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  lang?: string;
+  noindex?: boolean;
+  ogImage?: string;
 }
 
-const { title, description = 'Branding, web, content and digital marketing. Built around how you actually grow.' } = Astro.props;
+const { title, description = 'Branding, web, content and digital marketing. Built around how you actually grow.', lang = 'en', noindex = false, ogImage } = Astro.props;
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? 'https://settagency.com').href : undefined;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,6 +33,16 @@ const { title, description = 'Branding, web, content and digital marketing. Buil
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {ogImageUrl && (
+      <>
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </>
+    )}
   </head>
   <body>
     <Nav />
