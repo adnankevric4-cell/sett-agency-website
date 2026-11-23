@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { noWidow } from '../../utils/noWidow';
 import Testimonial from '../../components/Testimonial.astro';
+import { existsSync } from 'node:fs';
 
 export async function getStaticPaths() {
   const entries = await getCollection('work');
@@ -23,10 +24,11 @@ const sorted = allEntries.sort((a, b) => a.data.order - b.data.order);
 const currentIndex = sorted.findIndex(e => e.id === entry.id);
 const nextEntry = sorted[(currentIndex + 1) % sorted.length];
 
-const allImages = import.meta.glob<{ default: ImageMetadata }>('../../assets/work/**/*.png');
+const allImages = import.meta.glob<{ default: ImageMetadata }>('../../assets/work/**/*.{png,jpg}');
 
 // Card display data — mirrors the projects array in work.astro so the card is identical
 const WORK_CARD: Record<string, { desc: string; tag: string }> = {
+  'old-town-visoko':              { desc: 'A family restaurant beneath a medieval fortress, rebuilt as a brand locals come back to.', tag: 'BRAND + WEB + CONTENT' },
   'laleon-exclusive':             { desc: 'A fine jewelry e-commerce store built for launch.',                      tag: 'WOOCOMMERCE + E-COMMERCE' },
   'long-close-school':            { desc: 'A heritage school rebuilt to convert.',                                    tag: 'BRAND + WEB REBUILD' },
   'dope-jewelry-bean-up':         { desc: '3D ads built for paid social. A bean-shaped collection launched at scale.', tag: '3D + PAID ADS' },
@@ -91,6 +93,9 @@ type GridItem =
   | { type: 'vidimgpair'; file: string; img: ImageMetadata }
   | { type: 'fullvideo'; file: string }
   | { type: 'reel'; file: string }
+  | { type: 'fullvideomute'; file: string }
+  | { type: 'reels'; files: string[] }
+  | { type: 'stats' }
   | { type: 'video' };
 
 const gridItems: GridItem[] = (await Promise.all(
@@ -134,6 +139,13 @@ const gridItems: GridItem[] = (await Promise.all(
       const file = item.replace('fullvideo:', '');
       return { type: 'fullvideo', file } as const;
     }
+    if (item === 'stats') return { type: 'stats' } as const;
+    if (item.startsWith('fullvideo-mute:')) {
+      return { type: 'fullvideomute', file: item.replace('fullvideo-mute:', '') } as const;
+    }
+    if (item.startsWith('reels:')) {
+      return { type: 'reels', files: item.replace('reels:', '').split(':') } as const;
+    }
     if (item.startsWith('reel:')) {
       const file = item.replace('reel:', '');
       return { type: 'reel', file } as const;
@@ -143,6 +155,11 @@ const gridItems: GridItem[] = (await Promise.all(
     return { type: 'full', img } as const;
   })
 )).filter(Boolean) as GridItem[];
+
+const posterFor = (file: string) => {
+  const p = file.replace(/\.mp4$/, '-poster.jpg');
+  return existsSync(`public/work/${slug}/${p}`) ? `/work/${slug}/${p}` : undefined;
+};
 
 const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
 ---
@@ -316,10 +333,52 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
         if (item.type === 'fullvideo') return (
           <div class="case-grid__full">
             <div class="video-wrap">
-              <video autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+              <video autoplay muted loop playsinline preload="metadata" poster={posterFor(item.file)} style="width:100%;height:auto;display:block;">
                 <source src={`/work/${slug}/${item.file}`} type="video/mp4" />
               </video>
               <button class="sound-btn" aria-label="Toggle sound">SOUND OFF</button>
+            </div>
+          </div>
+        );
+        if (item.type === 'fullvideomute') return (
+          <div class="case-grid__full">
+            <video autoplay muted loop playsinline preload="metadata" poster={posterFor(item.file)} style="width:100%;height:auto;display:block;">
+              <source src={`/work/${slug}/${item.file}`} type="video/mp4" />
+            </video>
+          </div>
+        );
+        if (item.type === 'stats' && data.stats) return (
+          <div class="case-grid__full">
+            <div class="stats-band">
+              <p class="stats-label">{data.stats.label}</p>
+              <div class="stats-row">
+                {data.stats.items.map((s) => (
+                  <div class="stat">
+                    <span class="stat-value">{s.value}</span>
+                    <span class="stat-text">{s.text}</span>
+                  </div>
+                ))}
+              </div>
+              {data.stats.footer && <p class="stats-footer">{data.stats.footer}</p>}
+            </div>
+          </div>
+        );
+        if (item.type === 'reels') return (
+          <div class="case-grid__full">
+            <div class="reels-band">
+              <div class="reels-row">
+                {item.files.map((f, i) => (
+                  <div class={`reel-card${i === 1 ? ' reel-card--main' : ''}`}>
+                    <div class="video-wrap">
+                      <video autoplay muted loop playsinline preload="metadata" poster={posterFor(f)}>
+                        <source src={`/work/${slug}/${f}`} type="video/mp4" />
+                      </video>
+                      <button class="sound-btn" aria-label="Toggle sound">SOUND OFF</button>
+                    </div>
+                    {i === 1 && data.reelsCaption && <p class="reel-caption">{data.reelsCaption}</p>}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         );
@@ -546,6 +605,18 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
     transition: background 0.15s ease;
   }
   .sound-btn:hover { background: rgba(17, 17, 17, 0.9); }
+  .stats-band { background: #3B2A20; color: #EFE7DA; padding: clamp(32px, 5vw, 72px); }
+  .stats-label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #E39A7C; margin-bottom: clamp(24px, 3vw, 40px); }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .stat { display: flex; flex-direction: column; gap: 8px; border-top: 0.5px solid rgba(239, 231, 218, 0.25); padding-top: 16px; }
+  .stat-value { font-family: 'Roboto Serif', Georgia, serif; font-weight: 300; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; }
+  .stat-text { font-size: 14px; font-weight: 300; opacity: 0.8; }
+  .stats-footer { margin-top: clamp(24px, 3vw, 40px); font-size: 14px; font-weight: 300; opacity: 0.8; }
+  .reels-band { background: #EFE7DA; padding: clamp(32px, 5vw, 72px); }
+  .reels-row { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 2rem; align-items: center; max-width: 960px; margin: 0 auto; }
+  .reel-card video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block; border-radius: 16px; box-shadow: 0 12px 32px rgba(59, 42, 32, 0.18); }
+  .reel-card .video-wrap { position: relative; }
+  .reel-caption { margin-top: 16px; text-align: center; font-size: 13px; color: #555555; }
   .case-grid__reel { display: flex; justify-content: center; width: 100%; padding: 0; }
   .case-grid__reel video { width: 100%; max-width: 500px; aspect-ratio: 9 / 16; object-fit: cover; display: block; }
 
@@ -718,6 +789,10 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
     .case-grid__trio {
       grid-template-columns: 1fr;
     }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .reels-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; max-width: none; }
+    .reel-card { flex: 0 0 70%; scroll-snap-align: center; }
+    .reel-card--main { order: -1; }
     .case-grid__split {
       grid-template-columns: 1fr;
     }
@@ -780,7 +855,14 @@ const heroImg = gridItems[0]?.type === 'full' ? gridItems[0].img : undefined;
   document.querySelectorAll<HTMLButtonElement>('.sound-btn').forEach(btn => {
     const video = btn.previousElementSibling as HTMLVideoElement;
     btn.addEventListener('click', () => {
-      video.muted = !video.muted;
+      const unmute = video.muted;
+      if (unmute) {
+        document.querySelectorAll<HTMLButtonElement>('.sound-btn').forEach(other => {
+          const v = other.previousElementSibling as HTMLVideoElement;
+          if (v !== video) { v.muted = true; other.textContent = 'SOUND OFF'; }
+        });
+      }
+      video.muted = !unmute;
       btn.textContent = video.muted ? 'SOUND OFF' : 'SOUND ON';
     });
   });

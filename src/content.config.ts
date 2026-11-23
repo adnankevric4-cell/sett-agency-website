@@ -26,6 +26,12 @@ const work = defineCollection({
     })).optional(),
     gallery: z.array(z.string()).optional(),
     videoSlug: z.string().optional(),
+    stats: z.object({
+      label: z.string(),
+      items: z.array(z.object({ value: z.string(), text: z.string() })),
+      footer: z.string().optional(),
+    }).optional(),
+    reelsCaption: z.string().optional(),
   }),
 });
 
