@@ -40,7 +40,7 @@ stats:
     - { value: "61K", text: "people reached" }
     - { value: "75%", text: "from people who didn't follow yet" }
     - { value: "+230", text: "new followers" }
-  footer: "6 posts · 124.6K views in 30 days · 1,520 followers"
+  footer: "6 posts · 114K views in 14 days · 1,520 followers"
 reelsCaption: "65,834 views · 641 saves · 393 shares"
 summary: "Old Town has served guests beneath the medieval fortress of Visoko since 2005, but it was known as a stop for tourists, not a place locals chose. We built a brand rooted in the place itself and its medieval Bosnian heritage, and carried it through every touchpoint, from the menu on the table to the reel on a phone."
 challenge: "Old Town is a family restaurant with bungalows, set beneath Stari grad Visoki, the royal fortress of medieval Bosnia, looking out onto Visočica hill. After twenty years and a newly renovated interior, the owners wanted locals from Visoko, Sarajevo and Zenica coming for dinner, and families choosing it for birthdays, weddings and company evenings. They had a logo they wanted to keep, a limited budget, and no visual identity, website or social presence to build on."
