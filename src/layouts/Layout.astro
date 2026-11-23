@@ -33,6 +33,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? 'https://settagency.
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
+    <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="ea71ce0c-cb3a-4a43-bd9a-107dc59e0c99" data-domains="settagency.com,www.settagency.com"></script>
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {ogImageUrl && (
       <>

@@ -285,8 +285,9 @@ const halfSizes = '(max-width: 768px) 50vw, 640px';
     <h2 class="r-h2">{noWidow('Ako vam je ovo zanimljivo, javite se.')}</h2>
     <p class="r-body">{noWidow('Rado ćemo popričati pola sata o vašem restoranu. Pogledamo šta imate i kažemo vam iskreno šta bismo prvo uradili. Bez obaveze, i ako na kraju ne radimo zajedno.')}</p>
     <div class="r-buttons">
-      <a class="r-btn r-btn--solid" id="waBtn" href={waHref} data-number={WHATSAPP_NUMBER} data-text={WA_TEXT} target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      <a class="r-btn" href={`tel:${PHONE_NUMBER}`}>Pozovite nas</a>
+      <a class="r-btn r-btn--solid" id="waBtn" data-umami-event="restorani-whatsapp" href={waHref} data-number={WHATSAPP_NUMBER} data-text={WA_TEXT} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="r-btn" id="telBtn" href={`tel:${PHONE_NUMBER}`} data-umami-event="restorani-telefon">Pozovite nas</a>
+      <a class="r-phone" href={`tel:${PHONE_NUMBER}`} data-umami-event="restorani-telefon">+387 63 031 859</a>
     </div>
   </section>
 
@@ -415,6 +416,8 @@ const halfSizes = '(max-width: 768px) 50vw, 640px';
   .r-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
   .r-btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 26px; border: 1px solid rgba(247, 246, 242, 0.5); border-radius: 999px; color: #F7F6F2; text-decoration: none; font-size: 15px; font-weight: 500; }
   .r-btn:hover { border-color: #F7F6F2; }
+  .r-phone { align-self: center; margin-left: 12px; color: #F7F6F2; font-size: 18px; font-weight: 500; text-decoration: none; }
+  .r-phone:hover { text-decoration: underline; text-underline-offset: 4px; }
   .r-btn--solid { background: #F7F6F2; color: #111111; border-color: #F7F6F2; }
   .r-missing { margin-top: 20px; display: inline-block; background: #FFE58A; color: #111111; padding: 6px 10px; font-size: 13px; }
 
@@ -432,6 +435,7 @@ const halfSizes = '(max-width: 768px) 50vw, 640px';
     .r-mini-stats { gap: 24px; }
     .r-buttons { flex-direction: column; }
     .r-btn { width: 100%; }
+    .r-phone { margin: 8px 0 0; }
   }
 </style>
 
@@ -447,7 +451,9 @@ const halfSizes = '(max-width: 768px) 50vw, 640px';
     if (wa) {
       const text = `${wa.dataset.text} Restoran: ${rawName}`;
       wa.href = `https://wa.me/${wa.dataset.number}?text=${encodeURIComponent(text)}`;
+      wa.setAttribute('data-umami-event-restoran', rawName);
     }
+    document.getElementById('telBtn')?.setAttribute('data-umami-event-restoran', rawName);
   }
 
   // Header: Contact skrola na kontakt sekciju
