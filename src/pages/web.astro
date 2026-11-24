@@ -1,0 +1,410 @@
+---
+import { Picture } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { noWidow } from '../utils/noWidow';
+
+import laleon from '../assets/work/laleon-exclusive/media-6.png';
+import stirling from '../assets/work/stirling-education/media-23.png';
+import bcLaw from '../assets/work/bc-law-ltd/media-9.png';
+import dope from '../assets/work/dope-jewelry/media-11.png';
+import redshift from '../assets/work/redshift-education/media-13.png';
+import castle from '../assets/work/castle-college/media-12.png';
+
+const WHATSAPP_NUMBER = '38763031859';
+const PHONE_NUMBER = '+38763031859';
+const EMAIL = 'adnan.kevric@settagency.com';
+const WA_TEXT = 'Zdravo, zanima me besplatan pregled sajta. Naš sajt je: ';
+const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_TEXT)}`;
+const mailHref = `mailto:${EMAIL}?subject=${encodeURIComponent('Besplatan pregled sajta')}`;
+
+const sizes = '(max-width: 768px) 100vw, 640px';
+
+const analyses = [
+  {
+    video: '/web/ot.mp4',
+    poster: '/web/ot-poster.jpg',
+    domain: 'oldtownvisoko.ba',
+    client: 'Old Town Visoko',
+    industry: 'Restoran i bungalovi',
+    country: 'Bosna i Hercegovina',
+    before: 'Porodični restoran od 2005, ispod Starog grada Visoki. Odlična hrana i mjesto, ali bez prepoznatljivog brenda, a online nastup nije pratio ono što gosti dožive uživo.',
+    done: 'Brend inspirisan srednjovjekovnom Bosnom, jedno snimanje za brend video, dron, hranu i enterijer, meni od 24 strane, novi sajt i Instagram.',
+    result: '114.000 pregleda i 61.000 dosegnutih ljudi u prvih 14 dana. Tri četvrtine njih ranije nije pratilo restoran.',
+    link: '/work/old-town-visoko',
+  },
+  {
+    video: '/web/nw.mp4',
+    poster: '/web/nw-poster.jpg',
+    domain: 'nordwellhome.com',
+    client: 'Nordwell Home',
+    industry: 'Namještaj, webshop',
+    country: 'SAD',
+    before: 'Nov brend namještaja za američko tržište, bez ičega na početku. Trebao im je identitet i webshop koji prodaje bez prodavca u salonu.',
+    done: 'Brend identitet i webshop s kategorijama, stranicama proizvoda s mjerama i materijalima, i jasnim putem do besplatne konsultacije za ormare po mjeri.',
+    result: 'Webshop spreman za američko tržište, pokrenut u oktobru 2026.',
+    link: null,
+  },
+  {
+    video: '/web/lc.mp4',
+    poster: '/web/lc-poster.jpg',
+    domain: 'longcloseschool.co.uk',
+    client: 'Long Close School',
+    industry: 'Privatna škola',
+    country: 'Velika Britanija',
+    before: 'Škola od 1941. s jakom reputacijom, ali sajt to nije pokazivao. Bez brend standarda, zapušten sistem i tri školske zajednice zbijene u jedan sajt bez jasne logike za roditelje.',
+    done: 'Prvi put smo dokumentovali brend: logo, boje i tipografiju. Sajt smo izgradili oko puta roditelja, od prvog utiska do upita, s posebnim dijelom za svaku školu.',
+    result: 'Sajt koji roditelje vodi do upita, a ne samo da ih informiše, i brend sistem koji škola koristi samostalno.',
+    link: '/work/long-close-school',
+  },
+];
+
+const projects = [
+  { img: laleon, name: 'Laleon Exclusive', where: 'Istanbul', text: 'Webshop za nakit, spreman za prodaju i reklame od prvog dana.', alt: 'Laleon Exclusive webshop na laptopu' },
+  { img: stirling, name: 'Stirling Education', where: 'Međunarodna mreža', text: 'Jedan sajt za cijelu mrežu škola i univerziteta.', alt: 'Početna stranica Stirling Education' },
+  { img: castle, name: 'Castle College', where: 'Velika Britanija', text: 'Novi koledž, dva programa, jedan jasan put do prijave.', alt: 'Castle College sajt na mobitelu' },
+  { img: redshift, name: 'Redshift Education', where: 'Velika Britanija', text: 'Sajt za grupu škola koja raste.', alt: 'Sajt Redshift Education na monitoru' },
+  { img: bcLaw, name: 'BC Law', where: 'London', text: 'Advokatska kancelarija koja izgleda pouzdano, bez klišeja.', alt: 'Sajt advokatske kancelarije BC Law' },
+  { img: dope, name: 'Dope Jewelry', where: 'Sarajevo', text: 'Brend nakita od nule do Shopify prodavnice.', alt: 'Dope Jewelry Shopify prodavnica' },
+];
+---
+
+<Layout
+  title="Besplatan pregled Vašeg sajta | Sett"
+  description="Besplatno pregledamo Vaš sajt i pošaljemo Vam šta ne radi. Nemate sajt? Napravimo Vam besplatan plan."
+  lang="bs"
+  noindex
+  ogImage="/web/showreel-poster.jpg"
+>
+
+  <!-- 1. Showreel -->
+  <div class="w-reel">
+    <div class="w-reel-frame">
+      <video id="reel" class="w-reel-video" autoplay muted loop playsinline preload="metadata" poster="/web/showreel-poster.jpg">
+        <source src="/web/showreel.mp4" type="video/mp4" />
+      </video>
+      <button id="reelSound" class="w-sound" type="button" aria-pressed="false" data-umami-event="web-showreel-zvuk">Uključi zvuk</button>
+    </div>
+  </div>
+
+  <!-- 2. Analize -->
+  <section class="w-section" id="analize">
+    <p class="w-eyebrow">Analize</p>
+    <h2 class="w-h2">{noWidow('Kako to izgleda u praksi')}</h2>
+    <p class="w-lead">{noWidow('Tri projekta, tri različite branše. Gdje su bili, šta smo uradili i šta su dobili.')}</p>
+
+    {analyses.map((a) => (
+      <article class="w-case">
+        <div class="w-browser">
+          <div class="w-bar"><i></i><i></i><i></i><span>{a.domain}</span></div>
+          <div class="w-screen">
+            <video class="w-video" muted loop playsinline preload="metadata" poster={a.poster}>
+              <source src={a.video} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <dl class="w-meta">
+          <div><dt>Klijent</dt><dd>{a.client}</dd></div>
+          <div><dt>Branša</dt><dd>{a.industry}</dd></div>
+          <div><dt>Država</dt><dd>{a.country}</dd></div>
+        </dl>
+        <div class="w-story">
+          <div><h3>Gdje su bili</h3><p>{noWidow(a.before)}</p></div>
+          <div><h3>Šta smo uradili</h3><p>{noWidow(a.done)}</p></div>
+          <div><h3>Rezultat</h3><p>{noWidow(a.result)}</p></div>
+        </div>
+        {a.link && <a class="w-link" href={a.link}>Pogledajte cijeli projekat →</a>}
+      </article>
+    ))}
+  </section>
+
+  <!-- 3. Šta dobijate -->
+  <section class="w-section w-beige">
+    <p class="w-eyebrow">Šta dobijate</p>
+    <h2 class="w-h2 w-h2--gap">{noWidow('Imate sajt ili ne, znaćete šta dalje.')}</h2>
+    <div class="w-offer">
+      <div class="w-offer-col">
+        <h3>{noWidow('Imate sajt: besplatna analiza')}</h3>
+        <p class="w-offer-text">{noWidow('Pregledamo Vaš sajt kao Vaš gost i pošaljemo kratak PDF sa onim što treba popraviti.')}</p>
+        <ul class="w-list">
+          <li>{noWidow('Kako sajt radi na mobitelu')}</li>
+          <li>{noWidow('Koliko se brzo učitava')}</li>
+          <li>{noWidow('Da li Vas Google pronalazi')}</li>
+          <li>{noWidow('Da li je odmah jasno šta nudite i kako Vas kontaktirati')}</li>
+          <li>{noWidow('Da li dizajn uliva povjerenje')}</li>
+        </ul>
+      </div>
+      <div class="w-offer-col">
+        <h3>{noWidow('Nemate sajt: besplatan plan')}</h3>
+        <p class="w-offer-text">{noWidow('Napravimo plan za Vaš budući sajt, da znate šta Vam treba prije nego što bilo šta platite.')}</p>
+        <ul class="w-list">
+          <li>{noWidow('Koje stranice Vam trebaju')}</li>
+          <li>{noWidow('Šta na njima pisati')}</li>
+          <li>{noWidow('Primjeri sajtova iz Vaše branše')}</li>
+          <li>{noWidow('Okvirna cijena i rok')}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Hero tekst -->
+  <section class="w-hero">
+    <p class="w-prepared" id="preparedFor" hidden>Pripremljeno za <span id="preparedName"></span></p>
+    <h1 class="w-title">{noWidow('Vaš sajt je prvi utisak. Hajde da ga pogledamo.')}</h1>
+    <div class="w-intro">
+      <p>{noWidow('Besplatno pregledamo Vaš sajt i pošaljemo Vam šta ne radi i šta biste dobili kad to popravite. Nemate sajt? Napravimo Vam besplatan plan.')}</p>
+      <div class="w-hero-buttons">
+        <a class="w-btn w-btn--dark" href="#kontakt" data-scroll>Zatražite besplatan pregled</a>
+        <a class="w-btn w-btn--line" href="#analize" data-scroll>Pogledajte primjere</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Kako izgleda pregled -->
+  <section class="w-section w-dark">
+    <p class="w-eyebrow">Kako ide</p>
+    <h2 class="w-h2 w-h2--gap">{noWidow('Kako izgleda pregled')}</h2>
+    <div class="w-steps">
+      <div class="w-step"><span class="w-num">01</span><h3>Pošaljete link</h3><p>{noWidow('Pošaljite nam link na sajt putem WhatsAppa ili maila. Ako nemate sajt, napišite nam čime se bavite.')}</p></div>
+      <div class="w-step"><span class="w-num">02</span><h3>Dobijete PDF</h3><p>{noWidow('Pregledamo sajt na mobitelu i računaru i pošaljemo kratak PDF: šta ne radi, zašto je to važno i kako to popraviti.')}</p></div>
+      <div class="w-step"><span class="w-num">03</span><h3>Vi odlučujete</h3><p>{noWidow('Ako želite, prođemo kroz analizu na kratkom pozivu. Ako ne, PDF ostaje Vaš.')}</p></div>
+    </div>
+  </section>
+
+  <!-- 6. Ostali radovi -->
+  <section class="w-section" id="radovi">
+    <p class="w-eyebrow">Naši sajtovi</p>
+    <h2 class="w-h2 w-h2--gap">{noWidow('Ostali radovi')}</h2>
+    <div class="w-grid">
+      {projects.map((p) => (
+        <figure>
+          <div class="w-img">
+            <Picture src={p.img} formats={['webp']} fallbackFormat="jpg" widths={[640, 1280]} sizes={sizes} alt={p.alt} loading="lazy" />
+          </div>
+          <figcaption><strong>{p.name}</strong> <span class="w-where">{p.where}</span><br />{noWidow(p.text)}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <a class="w-link" href="/work">Svi projekti →</a>
+  </section>
+
+  <!-- 7. Pitanja -->
+  <section class="w-section w-faq-section">
+    <p class="w-eyebrow">Pitanja</p>
+    <h2 class="w-h2 w-h2--gap">{noWidow('Česta pitanja')}</h2>
+    <div class="w-faq">
+      <details open><summary>Je li pregled stvarno besplatan?<span aria-hidden="true">+</span></summary><p>{noWidow('Da. Dobijete PDF bez ikakve obaveze. Ako odlučite raditi s nama, odlično. Ako ne, analiza Vam ostaje.')}</p></details>
+      <details><summary>Šta ako nemam sajt?<span aria-hidden="true">+</span></summary><p>{noWidow('Napravimo Vam besplatan plan: koje stranice trebate, šta na njima pisati, te okvirnu cijenu i rok.')}</p></details>
+      <details><summary>Koliko košta novi sajt?<span aria-hidden="true">+</span></summary><p>{noWidow('Zavisi od obima. Okvirnu cijenu dobijete u analizi ili planu, prije bilo kakve obaveze.')}</p></details>
+      <details><summary>Radite li samo u BiH?<span aria-hidden="true">+</span></summary><p>{noWidow('Ne. Radimo za klijente u Bosni i Hercegovini, Velikoj Britaniji, Evropi i SAD-u.')}</p></details>
+    </div>
+  </section>
+
+  <!-- 8. Kontakt -->
+  <section class="w-section w-black" id="kontakt">
+    <p class="w-eyebrow">Kontakt</p>
+    <h2 class="w-h2">{noWidow('Pošaljite nam link.')}</h2>
+    <p class="w-body">{noWidow('Javite se na WhatsApp, mail ili telefon. Pošaljite link na sajt ili napišite čime se bavite, a mi se javljamo s analizom.')}</p>
+    <div class="w-buttons">
+      <a class="w-btn w-btn--solid" href={waHref} data-wa data-umami-event="web-whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="w-btn w-btn--outline" id="mailBtn" href={mailHref} data-umami-event="web-email">Pošaljite mail</a>
+      <a class="w-btn w-btn--outline" href={`tel:${PHONE_NUMBER}`} data-umami-event="web-telefon">Pozovite nas</a>
+      <a class="w-phone" href={`tel:${PHONE_NUMBER}`} data-umami-event="web-telefon">+387 63 031 859</a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .w-reel, .w-hero, .w-section {
+    --px: clamp(16px, 6vw, 80px);
+    --py: clamp(64px, 9vw, 120px);
+  }
+
+  /* Showreel */
+  .w-reel { padding: calc(24px + 18px + 56px) var(--px) 0; }
+  .w-reel-frame { position: relative; max-width: 1600px; margin: 0 auto; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #E5E4E0; }
+  .w-reel-video { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .w-sound { position: absolute; right: 16px; bottom: 16px; padding: 10px 18px; border-radius: 999px; border: none; background: rgba(17,17,17,0.72); color: #F7F6F2; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; backdrop-filter: blur(6px); }
+  .w-sound:hover { background: #111111; }
+  .w-sound:focus-visible { outline: 2px solid #F7F6F2; outline-offset: 2px; }
+
+  /* Hero */
+  .w-hero { padding: var(--py) var(--px); max-width: 1600px; margin: 0 auto; }
+  .w-prepared { margin-bottom: 20px; font-size: 15px; color: #555555; }
+  .w-prepared span { color: #111111; font-weight: 600; }
+  .w-title { font-size: clamp(2.5rem, 6vw, 6.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; color: #111111; max-width: 16ch; }
+  .w-intro { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; margin-top: clamp(32px, 4vw, 56px); padding-top: clamp(24px, 3vw, 40px); border-top: 0.5px solid #BBBBBB; }
+  .w-intro p { font-size: 20px; font-weight: 300; line-height: 1.6; color: #333333; max-width: 60ch; }
+  .w-hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Sekcije */
+  .w-section { padding: var(--py) var(--px); }
+  .w-dark, .w-black { background: #111111; color: #F7F6F2; }
+  .w-beige { background: #EFEDE7; }
+  .w-dark :is(h2, h3, p), .w-black :is(h2, h3, p) { color: inherit; }
+  .w-eyebrow { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: #888888; margin-bottom: 20px; }
+  .w-h2 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 400; line-height: 1.12; letter-spacing: -0.015em; max-width: 22ch; }
+  .w-h2--gap { margin-bottom: clamp(32px, 4vw, 56px); }
+  .w-lead { font-size: 18px; font-weight: 300; line-height: 1.7; color: #555555; max-width: 56ch; margin-top: 20px; }
+
+  /* Šta dobijate */
+  .w-offer { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 80px); }
+  .w-offer-col h3 { font-size: clamp(1.4rem, 2vw, 1.75rem); font-weight: 400; line-height: 1.25; color: #111111; margin-bottom: 14px; }
+  .w-offer-text { font-size: 17px; font-weight: 300; line-height: 1.65; color: #333333; margin-bottom: 20px; max-width: 48ch; }
+  .w-list { list-style: none; padding: 0; margin: 0; border-top: 0.5px solid #CFCCC4; }
+  .w-list li { font-size: 17px; font-weight: 300; line-height: 1.5; padding: 14px 0; border-bottom: 0.5px solid #CFCCC4; color: #222222; }
+
+  /* Analize */
+  .w-case { margin-top: clamp(56px, 7vw, 104px); }
+  .w-browser { max-width: 1280px; border-radius: 12px; overflow: hidden; background: #FFFFFF; box-shadow: 0 30px 80px rgba(17,17,17,0.12), 0 6px 20px rgba(17,17,17,0.06); }
+  .w-bar { position: relative; height: 36px; background: #F3F1EC; border-bottom: 1px solid #E4E1DA; }
+  .w-bar i { position: absolute; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: #D9D6CF; }
+  .w-bar i:nth-child(1) { left: 16px; }
+  .w-bar i:nth-child(2) { left: 32px; }
+  .w-bar i:nth-child(3) { left: 48px; }
+  .w-bar span { position: absolute; left: 50%; top: 7px; transform: translateX(-50%); padding: 0 16px; min-width: 180px; height: 22px; border-radius: 6px; background: #E8E5DF; font-size: 12px; font-weight: 500; line-height: 22px; text-align: center; color: #6B6964; white-space: nowrap; }
+  .w-screen { aspect-ratio: 16 / 9; background: #E5E4E0; }
+  .w-screen video { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+  .w-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1280px; margin: 28px 0 0; padding-bottom: 20px; border-bottom: 0.5px solid #D8D6D0; }
+  .w-meta dt { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: #888888; margin-bottom: 6px; }
+  .w-meta dd { margin: 0; font-size: 17px; font-weight: 400; color: #111111; }
+
+  .w-story { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); max-width: 1280px; margin-top: 28px; }
+  .w-story h3 { font-size: 15px; font-weight: 600; color: #111111; margin-bottom: 10px; }
+  .w-story p { font-size: 16px; font-weight: 300; line-height: 1.65; color: #333333; }
+
+  /* Koraci */
+  .w-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .w-step { border-top: 1px solid rgba(247,246,242,0.4); padding-top: 20px; }
+  .w-num { display: block; font-size: 13px; font-weight: 500; color: #888888; margin-bottom: 14px; }
+  .w-step h3 { font-size: 20px; font-weight: 500; margin-bottom: 10px; }
+  .w-step p { font-size: 16px; font-weight: 300; line-height: 1.6; color: rgba(247,246,242,0.8) !important; }
+
+  /* Ostali radovi */
+  .w-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+  .w-img { aspect-ratio: 16 / 9; overflow: hidden; border-radius: 20px; background: #E5E4E0; }
+  .w-img :global(picture), .w-img :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  figure { margin: 0; }
+  figcaption { margin-top: 12px; font-size: 15px; font-weight: 300; line-height: 1.6; color: #555555; }
+  figcaption strong { font-weight: 600; color: #111111; margin-right: 6px; }
+  .w-where { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; }
+  .w-link { display: inline-block; margin-top: 28px; color: #111111; font-size: 15px; font-weight: 500; text-underline-offset: 4px; }
+
+  /* FAQ */
+  .w-faq details { border-top: 0.5px solid #E5E4E0; }
+  .w-faq details:last-child { border-bottom: 0.5px solid #E5E4E0; }
+  .w-faq summary { list-style: none; display: flex; justify-content: space-between; gap: 24px; padding: 22px 0; font-size: 19px; font-weight: 500; cursor: pointer; }
+  .w-faq summary::-webkit-details-marker { display: none; }
+  .w-faq summary span { font-weight: 300; transition: transform 0.25s ease; }
+  .w-faq details[open] summary span { transform: rotate(45deg); }
+  .w-faq summary:focus-visible { outline: 2px solid #111111; outline-offset: 4px; }
+  .w-faq details p { font-size: 17px; font-weight: 300; line-height: 1.7; color: #333333; padding-bottom: 24px; max-width: 70ch; }
+
+  /* Kontakt */
+  .w-body { font-size: 18px; font-weight: 300; line-height: 1.7; margin-top: 20px; max-width: 56ch; color: rgba(247,246,242,0.8) !important; }
+  .w-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; align-items: center; }
+  .w-btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 26px; border-radius: 999px; text-decoration: none; font-size: 15px; font-weight: 500; border: 1px solid transparent; }
+  .w-btn--dark { background: #111111; color: #F7F6F2; }
+  .w-btn--line { border-color: #111111; color: #111111; }
+  .w-btn--solid { background: #F7F6F2; color: #111111; }
+  .w-btn--outline { border-color: rgba(247,246,242,0.5); color: #F7F6F2; }
+  .w-btn--outline:hover { border-color: #F7F6F2; }
+  .w-phone { margin-left: 12px; color: #F7F6F2; font-size: 18px; font-weight: 500; text-decoration: none; }
+  .w-phone:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  @media (max-width: 768px) {
+    .w-reel-frame { border-radius: 12px; }
+    .w-sound { right: 10px; bottom: 10px; padding: 8px 14px; font-size: 13px; }
+    .w-intro, .w-offer, .w-steps, .w-grid, .w-story { grid-template-columns: 1fr; }
+    .w-meta { grid-template-columns: 1fr 1fr; }
+    .w-title { font-size: 40px; }
+    .w-h2 { font-size: 32px; }
+    .w-bar span { min-width: 0; font-size: 11px; }
+    .w-buttons, .w-hero-buttons { flex-direction: column; align-items: stretch; }
+    .w-btn { width: 100%; }
+    .w-phone { margin: 8px 0 0; }
+  }
+</style>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const rawName = (params.get('r') ?? '').trim().slice(0, 60);
+  if (rawName) {
+    const line = document.getElementById('preparedFor');
+    const nameEl = document.getElementById('preparedName');
+    if (line && nameEl) { nameEl.textContent = rawName; line.hidden = false; }
+    document.querySelectorAll<HTMLAnchorElement>('a[data-wa]').forEach((a) => {
+      const text = `Zdravo, zanima me besplatan pregled sajta. Firma: ${rawName}. Naš sajt je: `;
+      a.href = `https://wa.me/38763031859?text=${encodeURIComponent(text)}`;
+      a.setAttribute('data-umami-event-firma', rawName);
+    });
+    const mail = document.getElementById('mailBtn') as HTMLAnchorElement | null;
+    if (mail) {
+      mail.href = `mailto:adnan.kevric@settagency.com?subject=${encodeURIComponent('Besplatan pregled sajta: ' + rawName)}`;
+      mail.setAttribute('data-umami-event-firma', rawName);
+    }
+    // Umami: zabilježi otvaranje personalizovanog linka
+    let tries = 0;
+    const track = () => {
+      const umami = (window as any).umami;
+      if (umami && typeof umami.track === 'function') { umami.track('web-otvoren', { firma: rawName }); return; }
+      if (++tries < 10) setTimeout(track, 300);
+    };
+    if (document.readyState === 'complete') track(); else window.addEventListener('load', track);
+  }
+
+  // Glatko skrolanje za interne linkove
+  const scrollTo = (id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const lenis = (window as any).__lenis;
+    if (lenis) lenis.scrollTo(target); else target.scrollIntoView({ behavior: 'smooth' });
+  };
+  document.querySelectorAll<HTMLAnchorElement>('a[data-scroll]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href')?.replace('#', '');
+      if (!id) return;
+      e.preventDefault();
+      scrollTo(id);
+    });
+  });
+
+  // Header: Contact skrola na kontakt
+  document.querySelectorAll<HTMLAnchorElement>('.nav-link[href="/contact"]').forEach((link) => {
+    link.href = '#kontakt';
+    const label = link.querySelector('.link-text');
+    if (label) label.textContent = 'Kontakt';
+    link.addEventListener('click', (e) => {
+      if (!document.getElementById('kontakt')) return;
+      e.preventDefault();
+      setTimeout(() => scrollTo('kontakt'), 350);
+    });
+  });
+
+  // Showreel: zvuk
+  const reel = document.getElementById('reel') as HTMLVideoElement | null;
+  const soundBtn = document.getElementById('reelSound') as HTMLButtonElement | null;
+  if (reel && soundBtn) {
+    soundBtn.addEventListener('click', () => {
+      const on = reel.muted;
+      reel.muted = !on;
+      if (on) { reel.currentTime = 0; reel.play().catch(() => {}); }
+      soundBtn.textContent = on ? 'Isključi zvuk' : 'Uključi zvuk';
+      soundBtn.setAttribute('aria-pressed', String(on));
+    });
+  }
+
+  // Videi analiza: pauza van ekrana
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const videos = Array.from(document.querySelectorAll<HTMLVideoElement>('.w-video, .w-reel-video'));
+  if (reduceMotion && reel) reel.pause();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const v = entry.target as HTMLVideoElement;
+      if (entry.isIntersecting) { if (!reduceMotion) v.play().catch(() => {}); }
+      else if (!v.paused) v.pause();
+    });
+  }, { threshold: 0.25 });
+  videos.forEach((v) => io.observe(v));
+</script>

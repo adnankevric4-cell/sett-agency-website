@@ -454,6 +454,14 @@ const halfSizes = '(max-width: 768px) 50vw, 640px';
       wa.setAttribute('data-umami-event-restoran', rawName);
     }
     document.getElementById('telBtn')?.setAttribute('data-umami-event-restoran', rawName);
+    // Umami: zabilježi otvaranje personalizovanog linka
+    let tries = 0;
+    const track = () => {
+      const umami = (window as any).umami;
+      if (umami && typeof umami.track === 'function') { umami.track('restorani-otvoren', { restoran: rawName }); return; }
+      if (++tries < 10) setTimeout(track, 300);
+    };
+    if (document.readyState === 'complete') track(); else window.addEventListener('load', track);
   }
 
   // Header: Contact skrola na kontakt sekciju
